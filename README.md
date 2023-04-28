@@ -14,6 +14,12 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 
 ```sh
 npm install
+npm install @capacitor/core @capacitor/cli
+npm i -g @ionic/cli
+npm install @ionic/vue @ionic/vue-router
+
+
+
 ```
 
 ### Compile and Hot-Reload for Development
