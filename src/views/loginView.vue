@@ -1,10 +1,9 @@
 <script setup>
-import { handleClick } from '../utils/authentication'
+import LoginField from '../components/LoginField.vue';
 </script>
 
 <template>
   <main>
-    <h1>LOGIN</h1>
-    <button @click="handleClick">Hello World!</button>
+    <LoginField/>
   </main>
 </template>

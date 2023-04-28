@@ -4,7 +4,7 @@ import { firebaseApp } from './connections'
 const auth = getAuth(firebaseApp)
 const provider = new GoogleAuthProvider()
 
-export function handleClick() {
+export function googleAuthentionPopup() {
   signInWithPopup(auth, provider)
     .then((result) => {
       console.log(result)
