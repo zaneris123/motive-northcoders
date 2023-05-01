@@ -1,11 +1,17 @@
 <script setup>
-import { googleAuthentionPopup } from '../utils/authentication'
+import { googleAuthenticationPopup } from '../utils/authentication'
+// import { useUserData } from '../stores/userData.jsx'
+
+const googleLogInHandler = async () => {
+  const data = await googleAuthenticationPopup()
+  console.log(data)
+}
 </script>
 
 <template>
   <section>
     <h1>LOGIN</h1>
-    <button @click="googleAuthentionPopup">Hello World!</button>
+    <button @click="googleLogInHandler">Hello World!</button>
   </section>
 </template>
 

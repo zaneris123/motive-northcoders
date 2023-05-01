@@ -1,26 +1,29 @@
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth'
 import { firebaseApp, db } from './connections'
-import { setDoc, doc } from 'firebase/firestore'
+import { setDoc, doc, getDoc } from 'firebase/firestore'
 
 const auth = getAuth(firebaseApp)
 const provider = new GoogleAuthProvider()
 
-const userRef = (uniqueUserId) => {
-  return db.collection('users').doc(uniqueUserId).get()
-}
-
-export function googleAuthentionPopup() {
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      console.log(result)
+export async function googleAuthenticationPopup() {
+  return signInWithPopup(auth, provider)
+    .then(async ({ user }) => {
       const data = {
-        username: result.user.displayName,
-        userImg: result.user.photoURL
+        userID: user.uid,
+        username: user.displayName,
+        userImg: user.photoURL,
+        providerID: user.providerId
       }
-      userRef(result.user.uid).then((result) => {
-        console.log('gotten result:', result)
-      })
-      setDoc(doc(db, 'users', result.user.uid), data)
+
+      const usersSnapshot = await getDoc(doc(db, 'users', user.uid))
+
+      if (usersSnapshot.exists()) {
+        return usersSnapshot.data()
+      } else {
+        return setDoc(doc(db, 'users', user.uid), { ...data, createdAt: new Date() }).then(() => {
+          return { ...data, createdAt: new Date() }
+        })
+      }
     })
     .catch((err) => {
       console.log(err)
