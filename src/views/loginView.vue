@@ -3,7 +3,7 @@ import LoginField from '../components/LoginField.vue';
 </script>
 
 <template>
-  <div id="my-account">
+  <main>
     <LoginField />
-  </div>
+  </main>
 </template>

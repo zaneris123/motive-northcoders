@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
- import MapView from '../views/MapView.vue'
+import MapView from '../views/MapView.vue';
 import LoginView from '../views/loginView.vue';
 
 const router = createRouter({
