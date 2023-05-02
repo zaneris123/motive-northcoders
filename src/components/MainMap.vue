@@ -1,15 +1,14 @@
 <script setup>
 import { GoogleMap } from '@capacitor/google-maps';
-import { onMounted} from 'vue';
-import { useGeolocation } from '../utils/useGeolocation'
+import { onMounted, onUnmounted} from 'vue';
+import { Geolocation } from '@capacitor/geolocation';
 
+onMounted( async () => {
+  const mapRef = document.getElementById('map')
+  
+  const coordinates = await Geolocation.getCurrentPosition();
+  console.log('Current position:', coordinates);
 
-
-
-     
-        onMounted( async () => {
-          const mapRef = document.getElementById('map')
-    
     const newMap = await GoogleMap.create({
         id: 'my-map', // Unique identifier for this map instance
         element: mapRef, // reference to the capacitor-google-map element
@@ -17,16 +16,14 @@ import { useGeolocation } from '../utils/useGeolocation'
         config: {
             center: {
               // The initial position to be rendered by the map
-                lat:33.6,
-                lng: -117.9,
+                lat: coordinates.coords.latitude,
+                lng: coordinates.coords.longitude
             },
             // The initial zoom level to be rendered by the map
-            zoom: 8,
+            zoom: 15,
         }
     })
-
   })
-  
 
 </script>
 
