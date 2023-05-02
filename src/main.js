@@ -1,14 +1,23 @@
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
+import { createApp } from 'vue';
 
-import App from './App.vue'
-import router from './router'
+import { createPinia } from 'pinia';
+import { firebaseApp } from './utils/connections';
 
-import './assets/main.css'
+import App from './App.vue';
+import router from './router';
 
-const app = createApp(App)
+import './assets/main.css';
+import { VueFire, VueFireAuth } from 'vuefire';
+import { IonicVue } from '@ionic/vue';
 
-app.use(createPinia())
-app.use(router)
+const modules = [VueFireAuth()];
+const app = createApp(App);
 
-app.mount('#app')
+app.use(IonicVue);
+app.use(createPinia());
+app.use(router);
+app.use(VueFire, { firebaseApp, modules });
+
+router.isReady().then(() => {
+  app.mount('#app');
+});

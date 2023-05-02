@@ -12,11 +12,14 @@
   "dependencies": {
     "@capacitor/cli": "^4.8.0",
     "@capacitor/core": "^4.8.0",
+    "@ionic/storage": "^3.0.6",
     "@ionic/vue": "^7.0.4",
     "@ionic/vue-router": "^7.0.4",
+    "firebase": "^9.21.0",
     "pinia": "^2.0.32",
     "vue": "^3.2.47",
-    "vue-router": "^4.1.6"
+    "vue-router": "^4.1.6",
+    "vuefire": "^3.1.0"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",
