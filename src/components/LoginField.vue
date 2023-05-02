@@ -2,11 +2,10 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { firebaseApp, db } from '../utils/connections';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
-// import { useUserStore } from '../stores/user';
+import { useUserStore } from '../stores/user';
 import { IonButton, IonImg, IonText, IonContent } from '@ionic/vue';
-import { userStore } from '../stores/user';
 
-// const store = useUserStore();
+const store = useUserStore();
 const auth = getAuth(firebaseApp);
 const provider = new GoogleAuthProvider();
 
@@ -19,29 +18,29 @@ const googleLogInHandler = () => {
         img: user.photoURL
       };
 
+      store.changeData(data.user_id, data.name, data.img);
+
       const userDocRef = doc(db, 'users', data.user_id);
 
-      return Promise.all([userStore.set('user', JSON.stringify(data)), getDoc(userDocRef)]);
-      // store.changeData(data.user_id, data.name, data.img);
+      return getDoc(userDocRef);
     })
     .then((document) => {
-      if (document[1].exists()) {
-        console.log(document[1]);
-        // store.insertDate(document.data().created);
+      if (document.exists()) {
+        store.insertDate(document.data().created);
       } else {
-        // const createdAt = new Date();
-        // store.insertDate(createdAt);
-        console.log("Error!");
-        // setDoc(doc(db, 'users', store.user.user_id), store.user);
+        const createdAt = new Date();
+        store.insertDate(createdAt);
+
+        setDoc(doc(db, 'users', store.user.user_id), store.user);
       }
 
-      // store.handleLogIn();
+      store.handleLogIn();
     });
 };
 </script>
 
 <template>
-  <ion-content id="userLoggedIn" v-if="false">
+  <ion-content id="userLoggedIn" v-if="store.isLogged">
     <ion-text
       ><h1>Welcome {{ store.user.name }}</h1></ion-text
     >
