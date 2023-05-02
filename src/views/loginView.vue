@@ -3,16 +3,7 @@ import LoginField from '../components/LoginField.vue';
 </script>
 
 <template>
-  <main>
+  <div id="my-account">
     <LoginField />
-  </main>
+  </div>
 </template>
-
-<style scoped>
-main {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-}
-</style>

@@ -1,28 +1,32 @@
-import { ref } from 'vue';
-import { defineStore } from 'pinia';
+import { Storage } from '@ionic/storage';
 
-export const useUserStore = defineStore('user', () => {
-  const user = ref({
-    user_id: '',
-    name: '',
-    img: '',
-    created: ''
-  });
-  const isLogged = ref(false);
+export const userStore = new Storage();
 
-  const changeData = (userId, userName, userImg) => {
-    user.value.user_id = userId;
-    user.value.name = userName;
-    user.value.img = userImg;
-  };
+// import { ref } from 'vue';
+// import { defineStore } from 'pinia';
 
-  const insertDate = (date) => {
-    user.value.created = date;
-  };
+// export const useUserStore = defineStore('user', () => {
+//   const user = ref({
+//     user_id: '',
+//     name: '',
+//     img: '',
+//     created: ''
+//   });
+//   const isLogged = ref(false);
 
-  const handleLogIn = () => {
-    isLogged.value = true;
-  };
+//   const changeData = (userId, userName, userImg) => {
+//     user.value.user_id = userId;
+//     user.value.name = userName;
+//     user.value.img = userImg;
+//   };
 
-  return { user, changeData, insertDate, handleLogIn, isLogged };
-});
+//   const insertDate = (date) => {
+//     user.value.created = date;
+//   };
+
+//   const handleLogIn = () => {
+//     isLogged.value = true;
+//   };
+
+//   return { user, changeData, insertDate, handleLogIn, isLogged };
+// });

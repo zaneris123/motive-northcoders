@@ -1,13 +1,11 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router';
-import { IonHeader, IonApp } from '@ionic/vue';
+import { IonApp } from '@ionic/vue';
 </script>
 
 <template>
   <ion-app>
-
-
-  <RouterView/>
+    <RouterView />
   </ion-app>
 </template>
 
