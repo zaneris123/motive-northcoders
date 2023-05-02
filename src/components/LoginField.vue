@@ -3,6 +3,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { firebaseApp, db } from '../utils/connections';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { useUserStore } from '../stores/user';
+import { IonButton,IonTitle, IonImg,IonHeader, IonToolbar, IonText, IonContent } from '@ionic/vue';
 
 const store = useUserStore();
 const auth = getAuth(firebaseApp);
@@ -39,19 +40,20 @@ const googleLogInHandler = () => {
 </script>
 
 <template>
-  <section id="userLoggedIn" v-if="store.isLogged">
-    <h1>Welcome {{ store.user.name }}</h1>
-    <img :src="store.user.img" alt="profile picture" />
-    <p>Joined on: {{ store.user.created }}</p>
-  </section>
-  <section id="login" v-else>
-    <h1>LOGIN</h1>
-    <button @click="googleLogInHandler">Google Sign Up</button>
-  </section>
+  <ion-content id="userLoggedIn" v-if="store.isLogged">
+    <ion-text><h1>Welcome {{ store.user.name }}</h1></ion-text>
+    <ion-img :src="store.user.img" alt="profile picture" />
+    <p><ion-text>Joined on: {{ store.user.created }}</ion-text></p>
+  </ion-content >
+  <ion-content  id="login" v-else>
+    <ion-text><h1>LOGIN</h1></ion-text>
+    <ion-button @click="googleLogInHandler">Google Sign Up</ion-button>
+  </ion-content >
+
 </template>
 
 <style scoped>
-section {
+ion-content {
   text-align: center;
 }
 
