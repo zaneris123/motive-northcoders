@@ -4,7 +4,7 @@ import { GoogleMap, Marker } from "vue3-google-map";
 import { useGeolocation } from './useGeolocation';
 import './assets/main.css';
 
-const GOOGLE_MAPS_API_KEY = 'AIzaSyBFYJIk12AQ4r5HmbjI_r2kyCRx7BBWq90'
+const GOOGLE_MAPS_API_KEY = 'AIzaSyAdWE-2tjyP_CSputOmiYZr_pdOfEDJTW4'
 
 export default defineComponent ({
   name: 'App',
@@ -30,7 +30,7 @@ export default defineComponent ({
    <p>Latitude: {{ currPos.lat.toFixed(2) }}, Longitude: {{ currPos.lng.toFixed(2) }}</p>
   </header>
   <section class="map">
-  <GoogleMap api-key="AIzaSyBFYJIk12AQ4r5HmbjI_r2kyCRx7BBWq90" style="width: 90vw; height: 80vh; margin: 0 auto" :center="currPos" :zoom="15">
+  <GoogleMap api-key="AIzaSyAdWE-2tjyP_CSputOmiYZr_pdOfEDJTW4" style="width: 90vw; height: 80vh; margin: 0 auto" :center="currPos" :zoom="15">
     <Marker :options="{ position: currPos }" />
   </GoogleMap>
   </section>
