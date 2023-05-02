@@ -1,6 +1,7 @@
 <script setup>
 import { GoogleMap } from '@capacitor/google-maps';
-import { onMounted, defineComponent } from 'vue';
+import { onMounted} from 'vue';
+import { useGeolocation } from '../utils/useGeolocation'
 
 
 
