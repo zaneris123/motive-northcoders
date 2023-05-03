@@ -3,9 +3,13 @@ import { GoogleMap } from '@capacitor/google-maps';
 import { onMounted } from 'vue';
 import { Geolocation } from '@capacitor/geolocation';
 import { IonSpinner } from '@ionic/vue';
-import { useLoading } from '../stores/loading'
+import { collection, doc, getDocs, getDoc } from 'firebase/firestore';
+import { db } from '../utils/connections';
+import { useLoading } from '../stores/loading';
+import { useLocationCard } from '../stores/locationCard';
 
-const isLoading = useLoading()
+const isLoading = useLoading();
+const locationStore = useLocationCard();
 
 onMounted(async () => {
   const mapRef = document.getElementById('map');
@@ -13,34 +17,53 @@ onMounted(async () => {
   const coordinates = await Geolocation.getCurrentPosition();
 
   const newMap = await GoogleMap.create({
-    id: 'my-map', // Unique identifier for this map instance
-    element: mapRef, // reference to the capacitor-google-map element
-    apiKey: 'AIzaSyAdWE-2tjyP_CSputOmiYZr_pdOfEDJTW4', // Google Maps API Key
+    id: 'my-map',
+    element: mapRef,
+    apiKey: 'AIzaSyAdWE-2tjyP_CSputOmiYZr_pdOfEDJTW4',
     config: {
       center: {
-        // The initial position to be rendered by the map
         lat: coordinates.coords.latitude,
         lng: coordinates.coords.longitude
       },
-      // The initial zoom level to be rendered by the map
       zoom: 15
-    },
-  })
+    }
+  });
 
-  isLoading.handleLoading();
+  const locationsDocRef = collection(db, 'locations');
 
+  const LocDocs = await getDocs(locationsDocRef);
+
+  const locationData = LocDocs.docs.map((secretLoc) => {
+    const marker = secretLoc.data().location;
+
+    return {
+      coordinate: {
+        lat: marker.latitude,
+        lng: marker.longitude
+      },
+      title: secretLoc.id
+    };
+  });
+
+  await newMap.addMarkers(locationData);
+
+  newMap.setOnMarkerClickListener(async (marker) => {
+    const fetchedSelectedLoc = await getDoc(doc(db, 'locations', marker.title));
+    const { name, posted_by, description, cost } = fetchedSelectedLoc.data();
+
+    locationStore.changeData(name, posted_by, description, cost);
+    locationStore.handleMarkerClicks();
+
+    isLoading.handleLoading();
+  });
 });
-
-
 </script>
 
 <template>
   <div v-if="isLoading.loading" class="loading">
     <ion-spinner></ion-spinner>
   </div>
-  <div>
-    <capacitor-google-map id="map"></capacitor-google-map>
-  </div>
+  <div id="map"></div>
 </template>
 
 <style scoped>
@@ -51,14 +74,5 @@ onMounted(async () => {
   text-align: center;
   align-items: center;
   justify-content: center;
-}
-
-capacitor-google-map {
-  display: block;
-  position: absolute;
-  top: 10vh;
-  width: 100vw;
-  height: 90vh;
-  margin: auto;
 }
 </style>
