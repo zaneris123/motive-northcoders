@@ -27,12 +27,11 @@ import '@ionic/vue/css/display.css';
 
 const modules = [VueFireAuth()];
 const app = createApp(App);
-const pinia = createPinia()
-pinia.use(piniaPluginPersistedstate)
-app.use(IonicVue);
-app.use(pinia);
-app.use(router);
-app.use(VueFire, { firebaseApp, modules });
+const pinia = createPinia();
+
+pinia.use(piniaPluginPersistedstate);
+
+app.use(IonicVue).use(pinia).use(router).use(VueFire, { firebaseApp, modules });
 
 router.isReady().then(() => {
   app.mount('#app');

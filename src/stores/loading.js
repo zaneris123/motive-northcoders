@@ -6,7 +6,7 @@ export const useLoading = defineStore('loading', () => {
 
   const handleLoading = () => {
     loading.value = false;
-  }
+  };
 
-  return {loading, handleLoading};
-})
+  return { loading, handleLoading };
+});
