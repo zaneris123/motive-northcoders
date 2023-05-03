@@ -1,0 +1,7 @@
+{
+  "name": "motive",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "custom"
+}

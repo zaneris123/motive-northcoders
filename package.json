@@ -7,13 +7,17 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "ionic:build": "npm run build",
+    "ionic:serve": "npm run dev"
   },
   "dependencies": {
+    "@capacitor/android": "4.8.0",
     "@capacitor/cli": "^4.8.0",
     "@capacitor/core": "^4.8.0",
     "@capacitor/geolocation": "^4.1.0",
     "@capacitor/google-maps": "^4.5.0",
+    "@capacitor/ios": "4.8.0",
     "@ionic/storage": "^3.0.6",
     "@ionic/vue": "^7.0.4",
     "@ionic/vue-router": "^7.0.4",
