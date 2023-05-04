@@ -14,7 +14,7 @@ import {
   IonPage
 } from '@ionic/vue';
 import menuIcon from '../assets/menu-outline.svg';
-import accountIcon from '../assets/person-outline.svg';
+import LoginButton from './LoginButton.vue';
 </script>
 
 <template>
@@ -44,9 +44,9 @@ import accountIcon from '../assets/person-outline.svg';
                 />
               </ion-title>
             </ion-col>
-            <ion-col size="2"
-              ><ion-icon :icon="accountIcon" class="account-icon"></ion-icon
-            ></ion-col>
+            <ion-col size="2">
+              <LoginButton/>
+            </ion-col>
           </ion-row>
         </ion-grid>
       </ion-toolbar>
@@ -55,6 +55,7 @@ import accountIcon from '../assets/person-outline.svg';
 </template>
 
 <style scoped>
+
 #first-header {
   width: 100vw;
   height: 10vh;

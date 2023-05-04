@@ -1,7 +1,5 @@
 <script setup>
 import MainMap from '../components/MainMap.vue';
-import Header from '../components/Header.vue';
-import TestHeader from '../components/TestHeader.vue';
 import IndividualLocation from '../components/IndividualLocation.vue';
 import { useLocationCard } from '../stores/locationCard';
 
@@ -10,7 +8,6 @@ const locationStore = useLocationCard();
 
 <template>
   <div id="header">
-    <TestHeader />
   </div>
   <div v-if="locationStore.isMarkerClicked" id="overlay">
     <IndividualLocation />
