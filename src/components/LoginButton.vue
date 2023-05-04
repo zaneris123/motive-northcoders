@@ -43,6 +43,7 @@ const googleLogInHandler = () => {
 </script>
 
 <template>
+    <div class="button">
     <ion-chip id="LoginPopoverButton">
         <ion-avatar id="LoginAvatar">
             <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
@@ -61,17 +62,20 @@ const googleLogInHandler = () => {
                 <ion-item :button="true" @click="googleLogInHandler">Login in</ion-item>
             </ion-list>
         </ion-content>
-
     </ion-popover>
+    </div>
 </template>
 
 <style scoped>
+
 #LoginLabel{
     font-size: 0.8vw;
 }
 #LoginAvatar {
-  width: auto;
-  height: 5vh;
+  width: 50px;
+  min-width: 30px;
+  height: 50px;
+  min-height: 50px;
 }
 #LoginPopoverButton {
   width: 10vw;
@@ -80,5 +84,6 @@ const googleLogInHandler = () => {
 #LoginIcon {
   padding: 1px;
   height: 5vh;
+  width: ;
 }
 </style>

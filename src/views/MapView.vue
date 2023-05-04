@@ -1,48 +1,36 @@
 <script setup>
 import MainMap from '../components/MainMap.vue';
-import IndividualLocation from '../components/IndividualLocation.vue';
-import { useLocationCard } from '../stores/locationCard';
+import LocationCard from '../components/LocationCard.vue';
+import { useLocation } from '../stores/location';
 
-const locationStore = useLocationCard();
+const locationStore = useLocation();
 </script>
 
 <template>
-  <div id="header">
-  </div>
   <div v-if="locationStore.isMarkerClicked" id="overlay">
-    <IndividualLocation />
+    <LocationCard />
   </div>
-  <div id="map-container">
     <main id="map">
       <MainMap />
     </main>
-  </div>
 </template>
 
 <style scope>
-#map-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0 auto;
-}
 
 #map {
-  display: block;
-  margin: auto;
-  width: 80vw;
-  height: 70vh;
+  position: fixed;
+  margin: 11vh auto 0;
+  width: 99vw;
+  height: 89vh;
 }
 
 #overlay {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  top: 10vh;
+  width: 100vw;
+  height: 90vh;
   background-color: rgb(0, 0, 0, 0.77);
   z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
 }
 </style>

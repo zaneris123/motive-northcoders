@@ -6,10 +6,10 @@ import { IonSpinner } from '@ionic/vue';
 import { collection, doc, getDocs, getDoc } from 'firebase/firestore';
 import { db } from '../utils/connections';
 import { useLoading } from '../stores/loading';
-import { useLocationCard } from '../stores/locationCard';
+import { useLocation } from '../stores/location';
 
 const isLoading = useLoading();
-const locationStore = useLocationCard();
+const locationStore = useLocation();
 
 onMounted(async () => {
   const mapRef = document.getElementById('map');
@@ -49,9 +49,9 @@ onMounted(async () => {
 
   newMap.setOnMarkerClickListener(async (marker) => {
     const fetchedSelectedLoc = await getDoc(doc(db, 'locations', marker.title));
-    const { name, posted_by, description, cost } = fetchedSelectedLoc.data();
+    const { name, posted_by, description, cost, categories } = fetchedSelectedLoc.data();
 
-    locationStore.changeData(name, posted_by, description, cost);
+    locationStore.loadData(name, posted_by, description, cost, categories);
     locationStore.handleMarkerClicks();
 
     isLoading.handleLoading();
@@ -61,9 +61,8 @@ onMounted(async () => {
 
 <template>
   <div v-if="isLoading.loading" class="loading">
-    <ion-spinner></ion-spinner>
+    <ion-spinner />
   </div>
-  <div id="map"></div>
 </template>
 
 <style scoped>

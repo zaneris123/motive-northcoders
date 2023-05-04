@@ -27,25 +27,25 @@ import LoginButton from './LoginButton.vue';
     <ion-content class="ion-padding">This is the menu content.</ion-content>
   </ion-menu>
   <ion-page id="main-content">
-    <ion-header id="first-header">
-      <ion-toolbar id="first-toolbar">
-        <ion-buttons slot="start">
+    <ion-header id="app-header">
+      <ion-toolbar>
+        <ion-buttons slot="start" class="menu-icon">
           <ion-menu-button>
-            <ion-icon :icon="menuIcon" class="menu-icon"></ion-icon>
+            <ion-icon :icon="menuIcon" ></ion-icon>
           </ion-menu-button>
         </ion-buttons>
         <ion-grid>
           <ion-row class="ion-align-items-center ion-justify-content-between">
             <ion-col size="8">
-              <ion-title class="logo">
+              <ion-title id="logo">
                 <img
                   src="../assets/motive-logo-nobackground-horizontal.png"
                   alt="Motive - the secret locations app logo"
                 />
               </ion-title>
             </ion-col>
-            <ion-col size="2">
-              <LoginButton/>
+            <ion-col size="2" class="account-icon">
+              <LoginButton />
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -56,37 +56,36 @@ import LoginButton from './LoginButton.vue';
 
 <style scoped>
 
-#first-header {
-  width: 100vw;
-  height: 10vh;
-}
-
-#first-toolbar {
+#app-header {
   display: flex;
   width: 100vw;
-  height: 10vh;
-}
-.logo {
-  text-align: center;
+  height: 11vh;
 }
 
-.logo img {
+
+#logo {
+  position: relative;
+  text-align: center;
+  width: 60vw;
+  right: 7vw
+}
+
+#logo img {
+  position: relative;
   height: 10vh;
   min-width: 200px;
+  top: -4px
 }
 
 .menu-icon {
   color: black;
-  width: 50px;
-  height: 50px;
+  width: 20vw;
+  height: 10vh;
 }
 
 .account-icon {
   color: black;
-  width: 50px;
-  height: 50px;
-  position: absolute;
-  right: 5px;
-  top: -25px;
+  width: 20vw;
+  height: 10vh;
 }
 </style>
