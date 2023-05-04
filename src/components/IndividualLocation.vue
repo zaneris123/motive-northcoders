@@ -19,13 +19,8 @@ const locationStore = useLocationCard();
 
 <style scoped>
 ion-card {
-  width: 40vw;
+  width: 70vw;
   height: 60vh;
   overflow: scroll;
-}
-
-ion-card img {
-  width: 50vw;
-  height: auto;
 }
 </style>

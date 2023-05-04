@@ -9,9 +9,9 @@ const locationStore = useLocationCard();
 </script>
 
 <template>
-  <header id="header">
+  <div id="header">
     <TestHeader />
-  </header>
+  </div>
   <div v-if="locationStore.isMarkerClicked" id="overlay">
     <IndividualLocation />
   </div>
