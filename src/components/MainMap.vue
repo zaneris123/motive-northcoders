@@ -50,8 +50,10 @@ onMounted(async () => {
   newMap.setOnMarkerClickListener(async (marker) => {
     const fetchedSelectedLoc = await getDoc(doc(db, 'locations', marker.title));
     const { name, posted_by, description, cost, categories } = fetchedSelectedLoc.data();
+    const userRef = await getDoc(doc(db, 'users', posted_by));
+    const author = userRef.data().name;
 
-    locationStore.loadData(name, posted_by, description, cost, categories);
+    locationStore.loadData(name, author, description, cost, categories);
     locationStore.handleMarkerClicks();
 
     isLoading.handleLoading();

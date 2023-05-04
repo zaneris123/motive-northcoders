@@ -7,7 +7,7 @@ export const useLocation = defineStore('location', () => {
     posted_by: '',
     description: '',
     cost: '',
-    categories: ''
+    categories: []
   });
 
   const isMarkerClicked = ref(false);
@@ -17,7 +17,7 @@ export const useLocation = defineStore('location', () => {
     selectedLoc.value.posted_by = author;
     selectedLoc.value.description = desc;
     selectedLoc.value.cost = price;
-    selectedLoc.value.categories = categories
+    selectedLoc.value.categories.push(...categories);
   };
 
   const handleMarkerClicks = () => {

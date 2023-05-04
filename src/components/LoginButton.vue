@@ -1,11 +1,19 @@
 <script setup>
-import { IonAvatar, IonButton, IonPopover, IonContent,IonList, IonItem, IonLabel, IonChip } from '@ionic/vue';
-import accountIcon from '../assets/person-outline.svg';
+import {
+  IonAvatar,
+  IonButton,
+  IonPopover,
+  IonContent,
+  IonList,
+  IonItem,
+  IonLabel,
+  IonChip
+} from '@ionic/vue';
+// import accountIcon from '../assets/person-outline.svg';
 import { useUserStore } from '../stores/user';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { firebaseApp, db } from '../utils/connections';
-
 
 const store = useUserStore();
 const auth = getAuth(firebaseApp);
@@ -39,37 +47,46 @@ const googleLogInHandler = () => {
       store.handleLogIn();
     });
 };
-
 </script>
 
 <template>
-    <div class="button">
+  <div class="button">
     <ion-chip id="LoginPopoverButton">
-        <ion-avatar id="LoginAvatar">
-            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-        </ion-avatar>
-            <ion-label id="LoginLabel">{{store.isLogged ? store.user.name : "Login"}}</ion-label>
+      <ion-avatar id="LoginAvatar">
+        <img
+          alt="Silhouette of a person's head"
+          src="https://ionicframework.com/docs/img/demos/avatar.svg"
+        />
+      </ion-avatar>
+      <ion-label id="LoginLabel">{{ store.isLogged ? store.user.name : 'Login' }}</ion-label>
     </ion-chip>
     <ion-popover trigger="LoginPopoverButton" :dismiss-on-select="true">
-        <ion-content v-if="store.isLogged">
-            <ion-list>
-                <ion-item :button="true">User Info</ion-item>
-                <ion-item :button="true" @click="()=>{store.$reset()}">Log out</ion-item>
-            </ion-list>
-        </ion-content>        
-        <ion-content v-else>
-            <ion-list>
-                <ion-item :button="true" @click="googleLogInHandler">Login in</ion-item>
-            </ion-list>
-        </ion-content>
+      <ion-content v-if="store.isLogged">
+        <ion-list>
+          <ion-item :button="true">User Info</ion-item>
+          <ion-item
+            :button="true"
+            @click="
+              () => {
+                store.$reset();
+              }
+            "
+            >Log out</ion-item
+          >
+        </ion-list>
+      </ion-content>
+      <ion-content v-else>
+        <ion-list>
+          <ion-item :button="true" @click="googleLogInHandler">Login in</ion-item>
+        </ion-list>
+      </ion-content>
     </ion-popover>
-    </div>
+  </div>
 </template>
 
 <style scoped>
-
-#LoginLabel{
-    font-size: 0.8vw;
+#LoginLabel {
+  font-size: 0.8vw;
 }
 #LoginAvatar {
   width: 50px;
@@ -84,6 +101,6 @@ const googleLogInHandler = () => {
 #LoginIcon {
   padding: 1px;
   height: 5vh;
-  width: ;
+  /* width: ; */
 }
 </style>

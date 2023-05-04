@@ -39,7 +39,7 @@ import LoginButton from './LoginButton.vue';
             <ion-col size="8">
               <ion-title id="logo">
                 <img
-                  src="../assets/motive-logo-nobackground-horizontal.png"
+                  src="../assets/4.svg"
                   alt="Motive - the secret locations app logo"
                 />
               </ion-title>

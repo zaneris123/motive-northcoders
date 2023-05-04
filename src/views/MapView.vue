@@ -10,13 +10,12 @@ const locationStore = useLocation();
   <div v-if="locationStore.isMarkerClicked" id="overlay">
     <LocationCard />
   </div>
-    <main id="map">
-      <MainMap />
-    </main>
+  <main id="map">
+    <MainMap />
+  </main>
 </template>
 
 <style scope>
-
 #map {
   position: fixed;
   margin: 11vh auto 0;
@@ -31,6 +30,5 @@ const locationStore = useLocation();
   height: 90vh;
   background-color: rgb(0, 0, 0, 0.77);
   z-index: 10;
-
 }
 </style>
