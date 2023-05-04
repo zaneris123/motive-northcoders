@@ -12,8 +12,6 @@ const locationStore = useLocationCard();
       <ion-card-subtitle>Recomended by {{ locationStore.selectedLoc.posted_by }}</ion-card-subtitle>
       <ion-card-title>{{ locationStore.selectedLoc.name }}</ion-card-title>
     </ion-card-header>
-
-    <ion-card-content>{{ locationStore.selectedLoc.description }}</ion-card-content>
   </ion-card>
 </template>
 
