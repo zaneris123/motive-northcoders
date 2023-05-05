@@ -1,28 +1,30 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
 
-export const useLocation = defineStore('location', () => {
-  const selectedLoc = ref({
-    name: '',
-    posted_by: '',
-    description: '',
-    cost: '',
-    categories: []
-  });
-
-  const isMarkerClicked = ref(false);
-
-  const loadData = (locName, author, desc, price, categories) => {
-    selectedLoc.value.name = locName;
-    selectedLoc.value.posted_by = author;
-    selectedLoc.value.description = desc;
-    selectedLoc.value.cost = price;
-    selectedLoc.value.categories.push(...categories);
-  };
-
-  const handleMarkerClicks = () => {
-    isMarkerClicked.value = !isMarkerClicked.value;
-  };
-
-  return { selectedLoc, isMarkerClicked, loadData, handleMarkerClicks };
+export const useLocation = defineStore('location', {
+  state: () => {
+    return {
+      selectedLoc: {
+        name: '',
+        posted_by: '',
+        description: '',
+        cost: '',
+        categories: []
+      },
+      isMarkerClicked: false
+    };
+  },
+  actions: {
+    loadData(locName, author, desc, price, categories) {
+      this.selectedLoc.name = locName;
+      this.selectedLoc.posted_by = author;
+      this.selectedLoc.description = desc;
+      this.selectedLoc.cost = price;
+      this.selectedLoc.categories.push(...categories);
+    },
+    handleMarkerClicks() {
+      this.isMarkerClicked = !this.isMarkerClicked;
+    }
+  }
 });
+
+
