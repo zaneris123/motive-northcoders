@@ -1,6 +1,6 @@
 <script setup>
 import { useLocation } from '../stores/location';
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonCardSubtitle } from '@ionic/vue';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonItem, IonIcon, IonCardSubtitle } from '@ionic/vue';
 
 const locationStore = useLocation();
 </script>
@@ -9,6 +9,7 @@ const locationStore = useLocation();
   <ion-card>
     <img src="https://ionicframework.com/docs/img/demos/card-media.png" />
     <ion-card-header>
+      <ion-item class="close-btn"> <ion-icon name="close-circle" item-right  @click="close()"></ion-icon> </ion-item>
       <ion-card-subtitle>Recommended by {{ locationStore.selectedLoc.posted_by }}</ion-card-subtitle>
       <ion-card-title>{{ locationStore.selectedLoc.name }}</ion-card-title>
     </ion-card-header>
