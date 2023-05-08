@@ -1,15 +1,15 @@
-import { defineStore } from 'pinia';
+import { defineStore } from "pinia";
 
-export const useUserStore = defineStore('user', {
+export const useUserStore = defineStore("user", {
   state: () => {
     return {
       user: {
-        user_id: '',
-        name: '',
-        img: '',
-        created: ''
+        user_id: "",
+        name: "",
+        img: "",
+        created: "",
       },
-      isLogged: false
+      isLogged: false,
     };
   },
   actions: {
@@ -23,7 +23,7 @@ export const useUserStore = defineStore('user', {
     },
     handleLogIn() {
       this.isLogged = true;
-    }
+    },
   },
-  persist: true
+  persist: true,
 });
