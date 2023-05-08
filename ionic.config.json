@@ -1,7 +1,0 @@
-{
-  "name": "motive-app-ionic",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "vue-vite"
-}
