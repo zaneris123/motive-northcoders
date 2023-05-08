@@ -48,14 +48,14 @@ const LogInHandler = () => {
 </script>
 
 <style scoped>
-.md ion-button {
+ion-button {
   font-size: 18px;
   --background: none;
   --border-style: none;
   --box-shadow: none;
 }
 
-ion-button.md ion-icon {
+ion-button ion-icon {
   margin-right: 18px;
 }
 </style>

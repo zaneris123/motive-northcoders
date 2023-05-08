@@ -20,7 +20,7 @@
       <div id="spinner" v-if="isLoading">
         <ion-spinner />
       </div>
-      <div id="map"></div>
+      <capacitor-google-maps id="map"></capacitor-google-maps>
     </ion-content>
   </ion-page>
 </template>
@@ -107,31 +107,27 @@ const closeCardPopup = () => {
 </script>
 
 <style scoped>
-ion-content.md #map {
-  text-align: center;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 72vw;
-  height: 94vh;
+capacitor-google-maps {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
 }
 
-ion-content.md #spinner {
+ion-content #spinner {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 72vw;
-  height: 93.8vh;
+  width: 100%;
+  height: 100%;
 }
 
-ion-content.md #overlay {
+ion-content #overlay {
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
-  width: 72vw;
-  height: 94vh;
+  width: 100%;
+  height: 100%;
   background-color: rgb(0, 0, 0, 0.77);
   z-index: 10;
   cursor: pointer;

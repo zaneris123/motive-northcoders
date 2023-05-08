@@ -38,8 +38,8 @@ const { locName, owner, images } = defineProps(["locName", "owner", "images"]);
 
 <style scoped>
 .md ion-card {
-  width: 50vw;
-  height: calc(50vw * 0.8);
+  width: 42vw;
+  height: calc(42vw * 0.8);
   cursor: auto;
   border-radius: 18px;
 }

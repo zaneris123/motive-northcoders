@@ -78,20 +78,20 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-ion-content.md #spinner {
+ion-content #spinner {
   display: flex;
   align-items: center;
   height: 100%;
   justify-content: center;
 }
 
-ion-content.md #filters {
+ion-content #filters {
   display: flex;
   text-align: right;
   height: 15vh;
 }
 
-ion-content.md #locations-list {
+ion-content #locations-list {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -100,10 +100,10 @@ ion-content.md #locations-list {
   margin-bottom: 20px;
 }
 
-ion-content.md #locations-list :hover {
+ion-content #locations-list :hover {
   transform: scale(1.05);
 }
-.md ion-card {
+ion-card {
   width: 25vw;
   height: 35vh;
   cursor: pointer;
@@ -114,7 +114,7 @@ ion-content.md #locations-list :hover {
   align-items: center;
 }
 
-.md ion-card figure {
+ion-card figure {
   width: 100%;
   height: 70%;
   margin: 0;
@@ -122,13 +122,13 @@ ion-content.md #locations-list :hover {
   margin-bottom: 0;
 }
 
-.md ion-card img {
+ion-card img {
   object-fit: cover;
   width: 100%;
   height: 100%;
 }
 
-.md ion-card ion-card-header {
+ion-card ion-card-header {
   width: 100%;
   height: 30%;
   display: flex;
