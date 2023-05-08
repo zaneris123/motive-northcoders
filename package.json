@@ -1,5 +1,5 @@
 {
-  "name": "motive-app-ionic",
+  "name": "motive-app",
   "private": true,
   "version": "0.0.1",
   "type": "module",
@@ -15,7 +15,6 @@
     "@capacitor/geolocation": "^5.0.1",
     "@capacitor/google-maps": "^5.0.1",
     "@capacitor/haptics": "5.0.1",
-    "@capacitor/ios": "5.0.1",
     "@capacitor/keyboard": "5.0.1",
     "@capacitor/status-bar": "5.0.1",
     "@ionic/vue": "^7.0.0",

@@ -1,6 +1,6 @@
 const config = {
   appId: "io.ionic.starter",
-  appName: "motive-app-ionic",
+  appName: "ionic-project",
   webDir: "dist",
   server: {
     androidScheme: "https",
