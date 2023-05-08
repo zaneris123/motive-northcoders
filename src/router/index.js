@@ -16,6 +16,12 @@ const routes = [
     name: "Locations List",
     component: ListView,
   },
+  {
+    path: "/about",
+    name: "About Us",
+    component: AboutView,
+  },
+
 ];
 
 const router = createRouter({
