@@ -19,10 +19,15 @@ const routes = [
     component: ListView,
   },
   {
+    path: "/about",
+    name: "About Us",
+    component: AboutView,
+  },
+  {
     path: "/locations/:location_id",
     name: "Single Location",
     component: SingleLocationView,
-  },
+  }
 ];
 
 const router = createRouter({
