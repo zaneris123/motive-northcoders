@@ -16,7 +16,9 @@
       </Carousel>
     </figure>
     <ion-card-header class="header">
-      <ion-card-title>{{ locName }}</ion-card-title>
+      <ion-card-title @click="router.push(`/locations/${locId}`)">{{
+        locName
+      }}</ion-card-title>
       <ion-card-subtitle>Recommended by {{ owner }}</ion-card-subtitle>
     </ion-card-header>
   </ion-card>
@@ -30,16 +32,26 @@ import {
   IonCardSubtitle,
 } from "@ionic/vue";
 import { defineProps } from "vue";
+import { useRouter } from "vue-router";
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Navigation, Pagination } from "vue3-carousel";
 
-const { locName, owner, images } = defineProps(["locName", "owner", "images"]);
+const router = useRouter();
+const { locName, owner, images, locId } = defineProps([
+  "locName",
+  "owner",
+  "images",
+  "locId",
+]);
 </script>
 
 <style scoped>
+ion-card ion-card-header ion-card-title {
+  cursor: pointer;
+}
 .md ion-card {
-  width: 50vw;
-  height: calc(50vw * 0.8);
+  width: 42vw;
+  height: calc(42vw * 0.8);
   cursor: auto;
   border-radius: 18px;
 }

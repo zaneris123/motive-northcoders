@@ -1,5 +1,5 @@
 {
-  "name": "motive-app-ionic",
+  "name": "motive-app",
   "private": true,
   "version": "0.0.1",
   "type": "module",
@@ -10,6 +10,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@capacitor/android": "5.0.1",
     "@capacitor/app": "5.0.1",
     "@capacitor/core": "5.0.1",
     "@capacitor/geolocation": "^5.0.1",

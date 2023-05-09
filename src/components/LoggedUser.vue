@@ -26,12 +26,12 @@ const userStore = useUserStore();
 </script>
 
 <style scoped>
-.md ion-img {
+ion-img {
   width: 40px;
   height: 40px;
 }
 
-.md ion-label {
+ion-label {
   font-size: 16px;
   margin-left: -7px;
 }

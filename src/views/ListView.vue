@@ -16,7 +16,11 @@
         <ion-title>Filters will go here</ion-title>
       </div>
       <div id="locations-list">
-        <ion-card v-for="location in locations" :key="location.locationInfo.id">
+        <ion-card
+          v-for="location in locations"
+          :key="location.location_id"
+          @click="router.push(`/locations/${location.location_id}`)"
+        >
           <figure id="location-pic">
             <img
               :src="location.locationInfo.image[0]"
@@ -39,6 +43,7 @@
 import { collection, getDoc, getDocs, doc } from "firebase/firestore";
 import { db } from "../utils/connection";
 import { onMounted, ref } from "vue";
+import { useRouter } from "vue-router";
 import {
   IonCard,
   IonTitle,
@@ -53,6 +58,8 @@ import {
   IonCardSubtitle,
   IonSpinner,
 } from "@ionic/vue";
+
+const router = useRouter();
 const locations = ref([]);
 const isLoading = ref(true);
 
@@ -60,13 +67,14 @@ onMounted(async () => {
   const locationsDocRef = collection(db, "locations");
   const LocDocs = await getDocs(locationsDocRef);
   const allLocations = LocDocs.docs;
-
+  console.log(allLocations[0]);
   const locationsAndAuthors = await Promise.all(
     allLocations.map(async (individualLocation) => {
       const owner = individualLocation.data().posted_by;
       const userRef = await getDoc(doc(db, "users", owner));
 
       return {
+        location_id: individualLocation.id,
         locationInfo: individualLocation.data(),
         author: userRef.data().name,
       };
@@ -78,20 +86,20 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-ion-content.md #spinner {
+ion-content #spinner {
   display: flex;
   align-items: center;
   height: 100%;
   justify-content: center;
 }
 
-ion-content.md #filters {
+ion-content #filters {
   display: flex;
   text-align: right;
   height: 15vh;
 }
 
-ion-content.md #locations-list {
+ion-content #locations-list {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -100,10 +108,15 @@ ion-content.md #locations-list {
   margin-bottom: 20px;
 }
 
-ion-content.md #locations-list :hover {
+ion-content #locations-list :hover {
   transform: scale(1.05);
 }
-.md ion-card {
+
+ion-content #locations-list ion-card :hover {
+  transform: none;
+}
+
+ion-card {
   width: 25vw;
   height: 35vh;
   cursor: pointer;
@@ -114,7 +127,7 @@ ion-content.md #locations-list :hover {
   align-items: center;
 }
 
-.md ion-card figure {
+ion-card figure {
   width: 100%;
   height: 70%;
   margin: 0;
@@ -122,13 +135,13 @@ ion-content.md #locations-list :hover {
   margin-bottom: 0;
 }
 
-.md ion-card img {
+ion-card img {
   object-fit: cover;
   width: 100%;
   height: 100%;
 }
 
-.md ion-card ion-card-header {
+ion-card ion-card-header {
   width: 100%;
   height: 30%;
   display: flex;

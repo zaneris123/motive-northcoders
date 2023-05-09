@@ -11,6 +11,7 @@
     <ion-content>
       <div id="overlay" v-if="isMarkerClicked" @click="closeCardPopup">
         <LocationCard
+          :locId="locId"
           :locName="locName"
           :owner="owner"
           :images="images"
@@ -20,7 +21,7 @@
       <div id="spinner" v-if="isLoading">
         <ion-spinner />
       </div>
-      <div id="map"></div>
+      <capacitor-google-maps id="map"></capacitor-google-maps>
     </ion-content>
   </ion-page>
 </template>
@@ -44,6 +45,7 @@ import { db } from "../utils/connection";
 import LocationCard from "../components/LocationCard.vue";
 
 const isLoading = ref(true);
+const locId = ref("");
 const locName = ref("");
 const owner = ref("");
 const images = ref([]);
@@ -90,6 +92,7 @@ onMounted(async () => {
     const userRef = await getDoc(doc(db, "users", posted_by));
     const author = userRef.data().name;
 
+    locId.value = marker.title;
     locName.value = name;
     owner.value = author;
     images.value.push(...image);
@@ -107,31 +110,27 @@ const closeCardPopup = () => {
 </script>
 
 <style scoped>
-ion-content.md #map {
-  text-align: center;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 72vw;
-  height: 94vh;
+capacitor-google-maps {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
 }
 
-ion-content.md #spinner {
+ion-content #spinner {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 72vw;
-  height: 93.8vh;
+  width: 100%;
+  height: 100%;
 }
 
-ion-content.md #overlay {
+ion-content #overlay {
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
-  width: 72vw;
-  height: 94vh;
+  width: 100%;
+  height: 100%;
   background-color: rgb(0, 0, 0, 0.77);
   z-index: 10;
   cursor: pointer;

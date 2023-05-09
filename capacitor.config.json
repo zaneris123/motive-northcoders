@@ -1,6 +1,8 @@
 {
-  "appId": "com.motive.app",
-  "appName": "motive",
-  "webDir": "public",
-  "bundledWebRuntime": false
+  "appId": "io.ionic.starter",
+  "appName": "ionic-project",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  }
 }
