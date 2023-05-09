@@ -67,7 +67,7 @@ onMounted(async () => {
   const locationsDocRef = collection(db, "locations");
   const LocDocs = await getDocs(locationsDocRef);
   const allLocations = LocDocs.docs;
-  console.log(allLocations[0]);
+
   const locationsAndAuthors = await Promise.all(
     allLocations.map(async (individualLocation) => {
       const owner = individualLocation.data().posted_by;

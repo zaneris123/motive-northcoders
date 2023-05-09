@@ -28,23 +28,30 @@
           </Slide>
         </Carousel>
       </figure>
-      <ion-card>
+      <ion-card class="card">
         <ion-card-header class="header">
-          <ion-card-title>About {{ locationObj.name }}</ion-card-title>
+          <ion-card-title>About</ion-card-title>
           <ion-card-subtitle>Recommended by {{ author }}</ion-card-subtitle>
         </ion-card-header>
-        <ion-card-content>
+        <ion-card-content class="content">
           <ion-text
             v-for="(categories, index) in locationObj.categories"
             :key="index"
           >
-            {{ categories }}<br />
+            {{ categories
+            }}<span v-if="index !== locationObj.categories.length - 1">, </span>
           </ion-text>
+          <p>Price: {{ locationObj.cost }}</p>
+          <p class="description">{{ locationObj.description }}</p>
+          <section id="map">
+            <ion-card-title class="map-title">Location</ion-card-title>
+            <figure>
+              <a :href="directionUrl" target="_blank"
+                ><img :src="staticUrl" class="image"
+              /></a>
+            </figure>
+          </section>
         </ion-card-content>
-        <ion-card-content>
-          {{ locationObj.description }}
-        </ion-card-content>
-        <a :href="directionUrl"><img :src="staticUrl" /></a>
       </ion-card>
       <CommentSection />
     </ion-content>
@@ -137,5 +144,52 @@ ion-content figure .carousel .slide-info {
 ion-content figure .carousel .slide-info img {
   min-width: 100%;
   height: 100%;
+}
+
+.card {
+  width: 100%;
+  margin: 0 auto;
+  background-color: #222;
+}
+
+.header {
+  background-color: #333;
+  color: #fff;
+}
+
+.content {
+  padding: 1rem;
+  font-size: 16px;
+  color: #ddd;
+}
+
+.description {
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 20px;
+  color: #fff;
+  text-align: justify;
+  border-bottom: 1px solid rgb(153, 151, 151);
+  padding-bottom: 2rem;
+}
+
+#map {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+ion-card ion-card-content figure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
 }
 </style>
