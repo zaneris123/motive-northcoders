@@ -45,9 +45,7 @@
         </ion-card-content>
         <a :href="directionUrl"><img :src="staticUrl"/></a>
       </ion-card>
-      <ion-card>
-        CommentCard
-      </ion-card>
+      <CommentSection/>
     </ion-content>
   </ion-page>
 </template>
@@ -75,6 +73,7 @@ import { useRoute } from "vue-router";
 import { onMounted, ref } from "vue";
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Navigation, Pagination } from "vue3-carousel";
+import CommentSection from "../components/CommentSection.vue"
 
 const route = useRoute();
 const locationId = route.params.location_id;
