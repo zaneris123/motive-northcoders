@@ -13,10 +13,33 @@
         <ion-spinner />
       </div>
       <div id="filters">
-        <ion-title>Filters will go here</ion-title>
+      <ion-title>Filter:</ion-title>
+       <ion-list>
+        <ion-item>
+            <ion-select aria-label="Categories Filter" placeholder="Categories" :compareWith="compareWith" @ionChange="categoriesFilter = $event.detail.value" :multiple="true">
+              <ion-select-option value="Nature">Nature</ion-select-option>
+              <ion-select-option value="Culture">Culture</ion-select-option>
+              <ion-select-option value="Scenic Spots">Scenic Spots</ion-select-option>
+              <ion-select-option value="Outdoor">Outdoor</ion-select-option>
+              <ion-select-option value="Adventure">Adventure</ion-select-option>
+              <ion-select-option value="Hike spots">Hike Spots</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <ion-list>
+        <ion-item>
+            <ion-select aria-label="Cost Filter" placeholder="Cost" :compareWith="compareWith" @ionChange="costFilter = JSON.stringify($event.detail.value)" :multiple="true">
+              <ion-select-option value="Free">Free</ion-select-option>
+              <ion-select-option value="£">£</ion-select-option>
+              <ion-select-option value="££">££</ion-select-option>
+              <ion-select-option value="£££">£££</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
       </div>
       <div id="locations-list">
         <ion-card
+          v-if="!isFiltered"
           v-for="location in locations"
           :key="location.location_id"
           @click="router.push(`/locations/${location.location_id}`)"
@@ -30,10 +53,11 @@
           <ion-card-header>
             <ion-card-title>{{ location.locationInfo.name }}</ion-card-title>
             <ion-card-subtitle
-              >Recomended by {{ location.author }}</ion-card-subtitle
+              >Recommended by {{ location.author }}</ion-card-subtitle
             >
           </ion-card-header>
         </ion-card>
+        <ion-title v-if="isFiltered">Filtered Locations</ion-title>
       </div>
     </ion-content>
   </ion-page>
@@ -57,17 +81,24 @@ import {
   IonCardTitle,
   IonCardSubtitle,
   IonSpinner,
+  IonItem, 
+  IonList, 
+  IonSelect, 
+  IonSelectOption
 } from "@ionic/vue";
 
 const router = useRouter();
 const locations = ref([]);
 const isLoading = ref(true);
+const categoriesFilter = ref([]);
+const costFilter = ref([])
+const isFiltered = ref(false);
+const filteredLocations = ref([])
 
 onMounted(async () => {
   const locationsDocRef = collection(db, "locations");
   const LocDocs = await getDocs(locationsDocRef);
   const allLocations = LocDocs.docs;
-  console.log(allLocations[0]);
   const locationsAndAuthors = await Promise.all(
     allLocations.map(async (individualLocation) => {
       const owner = individualLocation.data().posted_by;
@@ -80,8 +111,21 @@ onMounted(async () => {
       };
     })
   );
-  locations.value.push(...locationsAndAuthors);
-  isLoading.value = false;
+
+  if (!isFiltered.value){
+    locations.value.push(...locationsAndAuthors);
+    isLoading.value = false;
+  }
+
+  else {
+
+    locationsAndAuthors.forEach(location => {
+
+    })
+  }
+  console.log(locations.value[0].locationInfo.categories[0]);
+  console.log(categoriesFilter, '<<< CATEGORIES FILTER');
+  console.log(costFilter, '<<< COST FILTER')
 });
 </script>
 
@@ -96,7 +140,6 @@ ion-content #spinner {
 ion-content #filters {
   display: flex;
   text-align: right;
-  height: 15vh;
 }
 
 ion-content #locations-list {
@@ -104,7 +147,6 @@ ion-content #locations-list {
   flex-direction: row;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  gap: 40px;
   margin-bottom: 20px;
 }
 
@@ -117,8 +159,7 @@ ion-content #locations-list ion-card :hover {
 }
 
 ion-card {
-  width: 25vw;
-  height: 35vh;
+  height: 50vh;
   cursor: pointer;
   border-radius: 12px;
   display: flex;
