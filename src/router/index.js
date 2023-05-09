@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "@ionic/vue-router";
 import MapView from "../views/MapView.vue";
 import ListView from "../views/ListView.vue";
 import SingleLocationView from "../views/SingleLocationView.vue";
+import AboutView from "../views/AboutView.vue";
 
 const routes = [
   {
