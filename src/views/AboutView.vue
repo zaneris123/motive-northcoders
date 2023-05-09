@@ -1,6 +1,6 @@
 <template>
     <ion-page>
-        <ion-header :translucent="true">
+        <ion-header>
             <ion-toolbar>
                 <ion-buttons slot="start">
                     <ion-menu-button></ion-menu-button>
@@ -38,3 +38,24 @@
         </ion-content>
     </ion-page>
 </template>
+
+<script setup>
+import {
+    IonTitle,
+    IonContent,
+    IonPage,
+    IonToolbar,
+    IonButtons,
+    IonMenuButton,
+    IonHeader,
+    IonSpinner,
+} from "@ionic/vue";
+
+import { ref } from "vue";
+const isLoading = ref(true);
+
+setTimeout(() => {
+    isLoading.value = false;
+}, 500);
+
+</script>
