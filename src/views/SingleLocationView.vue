@@ -18,6 +18,7 @@
       <figure v-for="(image, index) in location.image" :key="index">
         <img :src="image" alt="location visual representation" />
       </figure>
+      <ReportSubmit :locationId="locationId" />
     </ion-content>
   </ion-page>
 </template>
@@ -37,6 +38,7 @@ import { getDoc, doc } from "firebase/firestore";
 import { db } from "../utils/connection";
 import { useRoute } from "vue-router";
 import { onMounted, ref } from "vue";
+import ReportSubmit from "../components/ReportSubmit.vue";
 
 const route = useRoute();
 const locationId = route.params.location_id;
