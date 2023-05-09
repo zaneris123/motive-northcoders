@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from "@ionic/vue-router";
 import MapView from "../views/MapView.vue";
 import ListView from "../views/ListView.vue";
+import SingleLocationView from "../views/SingleLocationView.vue";
+
 const routes = [
   {
     path: "",
@@ -15,6 +17,11 @@ const routes = [
     path: "/locations",
     name: "Locations List",
     component: ListView,
+  },
+  {
+    path: "/locations/:location_id",
+    name: "Single Location",
+    component: SingleLocationView,
   },
 ];
 

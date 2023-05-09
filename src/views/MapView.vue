@@ -11,6 +11,7 @@
     <ion-content>
       <div id="overlay" v-if="isMarkerClicked" @click="closeCardPopup">
         <LocationCard
+          :locId="locId"
           :locName="locName"
           :owner="owner"
           :images="images"
@@ -44,6 +45,7 @@ import { db } from "../utils/connection";
 import LocationCard from "../components/LocationCard.vue";
 
 const isLoading = ref(true);
+const locId = ref("");
 const locName = ref("");
 const owner = ref("");
 const images = ref([]);
@@ -90,6 +92,7 @@ onMounted(async () => {
     const userRef = await getDoc(doc(db, "users", posted_by));
     const author = userRef.data().name;
 
+    locId.value = marker.title;
     locName.value = name;
     owner.value = author;
     images.value.push(...image);

@@ -16,7 +16,11 @@
         <ion-title>Filters will go here</ion-title>
       </div>
       <div id="locations-list">
-        <ion-card v-for="location in locations" :key="location.locationInfo.id">
+        <ion-card
+          v-for="location in locations"
+          :key="location.location_id"
+          @click="router.push(`/locations/${location.location_id}`)"
+        >
           <figure id="location-pic">
             <img
               :src="location.locationInfo.image[0]"
@@ -39,6 +43,7 @@
 import { collection, getDoc, getDocs, doc } from "firebase/firestore";
 import { db } from "../utils/connection";
 import { onMounted, ref } from "vue";
+import { useRouter } from "vue-router";
 import {
   IonCard,
   IonTitle,
@@ -53,6 +58,8 @@ import {
   IonCardSubtitle,
   IonSpinner,
 } from "@ionic/vue";
+
+const router = useRouter();
 const locations = ref([]);
 const isLoading = ref(true);
 
@@ -60,13 +67,14 @@ onMounted(async () => {
   const locationsDocRef = collection(db, "locations");
   const LocDocs = await getDocs(locationsDocRef);
   const allLocations = LocDocs.docs;
-
+  console.log(allLocations[0]);
   const locationsAndAuthors = await Promise.all(
     allLocations.map(async (individualLocation) => {
       const owner = individualLocation.data().posted_by;
       const userRef = await getDoc(doc(db, "users", owner));
 
       return {
+        location_id: individualLocation.id,
         locationInfo: individualLocation.data(),
         author: userRef.data().name,
       };
@@ -103,6 +111,11 @@ ion-content #locations-list {
 ion-content #locations-list :hover {
   transform: scale(1.05);
 }
+
+ion-content #locations-list ion-card :hover {
+  transform: none;
+}
+
 ion-card {
   width: 25vw;
   height: 35vh;
