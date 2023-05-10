@@ -6,7 +6,7 @@
     <ion-card-content>
       <ion-list v-for="(singleCommentData, index) in commentArray" :key="index">
         <ion-item lines="none">
-          <SingleComment :singleCommentData="singleCommentData" />
+          <SingleComment :singleCommentData="singleCommentData" :commentArray="commentArray"/>
         </ion-item>
       </ion-list>
       <AddComment
@@ -36,8 +36,9 @@ const commentArray = ref([]);
 const { locationId } = defineProps(["locationId"]);
 
 const postCommentEventHandler = async (commentObj) => {
+  const docRef = await addDoc(collection(db, "comments"), commentObj);
+  commentObj.commentId= docRef.id;
   commentArray.value.push(commentObj);
-  await addDoc(collection(db, "comments"), commentObj);
 };
 
 onMounted(async () => {
