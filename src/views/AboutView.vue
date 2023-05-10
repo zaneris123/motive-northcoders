@@ -13,7 +13,8 @@
         <ion-spinner />
       </div>
       <div class="about-info" v-if="!isLoading">
-        <div class="welcome-info">
+        <ion-card class="card">
+          <div class="welcome-info">
           <h2>Welcome to Motive</h2>
           <p>
             Welcome to Motive, the ultimate guide to discovering unique and
@@ -50,6 +51,8 @@
             start your journey to discovering the UK's best-kept secrets.
           </p>
         </div>
+        </ion-card>
+       
       </div>
     </ion-content>
   </ion-page>
@@ -57,6 +60,7 @@
 
 <script setup>
 import {
+  IonCard,
   IonTitle,
   IonContent,
   IonPage,
@@ -82,9 +86,17 @@ ion-content .welcome-info {
 }
  .bg-image {
     background: url("../../859582.jpg") no-repeat 100% 100%;
-  --background: none;
+  --background: none
+  
 }
 .no-scroll .scroll-content {
   overflow: hidden;
+}
+ ion-card {
+  background: transparent;
+  box-shadow: 0 0 10px white;
+}
+.card {
+  color: white;
 }
 </style>
