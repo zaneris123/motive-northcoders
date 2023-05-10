@@ -9,7 +9,10 @@
           <SingleComment :singleCommentData="singleCommentData" />
         </ion-item>
       </ion-list>
-      <AddComment :postCommentEventHandler="postCommentEventHandler" :locationId="locationId"/>
+      <AddComment
+        :postCommentEventHandler="postCommentEventHandler"
+        :locationId="locationId"
+      />
     </ion-card-content>
   </ion-card>
 </template>
@@ -32,9 +35,9 @@ import { db } from "../utils/connection";
 const commentArray = ref([]);
 const { locationId } = defineProps(["locationId"]);
 
-const postCommentEventHandler= async (commentObj)=>{
-    commentArray.value.push(commentObj)
-    await addDoc(collection(db, "comments"), commentObj)
+const postCommentEventHandler = async (commentObj) => {
+  commentArray.value.push(commentObj);
+  await addDoc(collection(db, "comments"), commentObj);
 };
 
 onMounted(async () => {
@@ -42,7 +45,7 @@ onMounted(async () => {
     query(collection(db, "comments"), where("location_id", "==", locationId))
   );
   commentsQuery.forEach((doc) => {
-    commentArray.value.push({...doc.data(), commentId:doc.id});
+    commentArray.value.push({ ...doc.data(), commentId: doc.id });
   });
 });
 </script>
