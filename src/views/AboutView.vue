@@ -8,11 +8,11 @@
         <ion-title>About Us</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content>
+    <ion-content class="bg-image no-scroll">
       <div id="spinner" v-if="isLoading">
         <ion-spinner />
       </div>
-      <div class="about-info" v-else>
+      <div class="about-info" v-if="!isLoading">
         <div class="welcome-info">
           <h2>Welcome to Motive</h2>
           <p>
@@ -79,5 +79,12 @@ setTimeout(() => {
 ion-content .welcome-info {
   text-align: center;
   margin: 20px;
+}
+ .bg-image {
+    background: url("../../859582.jpg") no-repeat 100% 100%;
+  --background: none;
+}
+.no-scroll .scroll-content {
+  overflow: hidden;
 }
 </style>

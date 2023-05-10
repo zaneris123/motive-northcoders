@@ -79,6 +79,7 @@ import { getDoc, doc } from "firebase/firestore";
 import { db } from "../utils/connection";
 import { useRoute } from "vue-router";
 import { onMounted, ref } from "vue";
+
 import Carousel from "../components/Carousel.vue";
 import Slide from "../components/Slide.vue";
 import CommentSection from "../components/CommentSection.vue";
