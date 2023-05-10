@@ -64,7 +64,7 @@ const { postCommentEventHandler, locationId } = defineProps([
   "locationId",
 ]);
 const commentText = ref("");
-const commentRating = ref("3");
+const commentRating = ref("1");
 const commentInput = { user_id: userStore.user.user_id };
 const addCommentEnabled = ref(false);
 
@@ -86,24 +86,11 @@ const handleAddComment = async () => {
 };
 
 const handlePostComment = async () => {
-  if (userStore.isLogged) {
-    commentInput.posted_at = Timestamp.fromDate(new Date());
-    commentInput.location_id = locationId;
-    commentInput.comment_text = commentText.value;
-    commentInput.rating = Number(commentRating.value);
-    postCommentEventHandler(commentInput);
-  } else {
-    const alert = await alertController.create({
-      header: "Log-In to comment",
-      message: "You must be signed in to comment on posts",
-      buttons: [
-        {
-          text: "ok",
-        },
-      ],
-    });
-    await alert.present();
-  }
+  commentInput.posted_at = Timestamp.fromDate(new Date());
+  commentInput.location_id = locationId;
+  commentInput.comment_text = commentText.value;
+  commentInput.rating = Number(commentRating.value);
+  postCommentEventHandler(commentInput);
 };
 </script>
 
