@@ -9,7 +9,7 @@
           <SingleComment :singleCommentData="singleCommentData" />
         </ion-item>
       </ion-list>
-      <AddComment />
+      <AddComment :postCommentEventHandler="postCommentEventHandler" :locationId="locationId"/>
     </ion-card-content>
   </ion-card>
 </template>
@@ -26,18 +26,23 @@ import {
 import SingleComment from "./SingleComment.vue";
 import AddComment from "./AddComment.vue";
 import { onMounted, ref, defineProps } from "vue";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, query, where, addDoc } from "firebase/firestore";
 import { db } from "../utils/connection";
 
 const commentArray = ref([]);
 const { locationId } = defineProps(["locationId"]);
+
+const postCommentEventHandler= async (commentObj)=>{
+    commentArray.value.push(commentObj)
+    await addDoc(collection(db, "comments"), commentObj)
+};
 
 onMounted(async () => {
   const commentsQuery = await getDocs(
     query(collection(db, "comments"), where("location_id", "==", locationId))
   );
   commentsQuery.forEach((doc) => {
-    commentArray.value.push(doc.data());
+    commentArray.value.push({...doc.data(), commentId:doc.id});
   });
 });
 </script>
