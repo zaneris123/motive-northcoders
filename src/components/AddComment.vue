@@ -12,29 +12,29 @@
         <ion-radio-group v-model="commentRating">
           <ion-item>
             <ion-label>1</ion-label>
-            <ion-radio value="1" ></ion-radio>
+            <ion-radio value="1"></ion-radio>
           </ion-item>
           <ion-item>
             <ion-label>2</ion-label>
-            <ion-radio value="2" ></ion-radio>
+            <ion-radio value="2"></ion-radio>
           </ion-item>
           <ion-item>
             <ion-label>3</ion-label>
-            <ion-radio value="3" ></ion-radio>
+            <ion-radio value="3"></ion-radio>
           </ion-item>
           <ion-item>
             <ion-label>4</ion-label>
-            <ion-radio value="4" ></ion-radio>
+            <ion-radio value="4"></ion-radio>
           </ion-item>
           <ion-item>
             <ion-label>5</ion-label>
-            <ion-radio value="5" ></ion-radio>
+            <ion-radio value="5"></ion-radio>
           </ion-item>
         </ion-radio-group>
       </ion-item>
 
       <br />
-      <ion-button @click="handlePostComment" :disabled="!useUserStore.isLogged">Post</ion-button>
+      <ion-button @click="handlePostComment">Post</ion-button>
     </form>
   </div>
   <div class="comment-adding" v-else>
@@ -56,27 +56,55 @@ import {
 import { defineProps, ref } from "vue";
 import { Timestamp } from "firebase/firestore";
 import { useUserStore } from "../stores/user";
+import { alertController } from "@ionic/vue";
 
 const userStore = useUserStore();
-const {postCommentEventHandler, locationId} = defineProps(["postCommentEventHandler", "locationId"]);
+const { postCommentEventHandler, locationId } = defineProps([
+  "postCommentEventHandler",
+  "locationId",
+]);
 const commentText = ref("");
-const commentRating= ref("3");
-
-const commentInput = {user_id: userStore.user.user_id}
-
+const commentRating = ref("3");
+const commentInput = { user_id: userStore.user.user_id };
 const addCommentEnabled = ref(false);
 
-const handleAddComment = () => {
-  addCommentEnabled.value = true;
+const handleAddComment = async () => {
+  if (userStore.isLogged) {
+    addCommentEnabled.value = true;
+  } else {
+    const alert = await alertController.create({
+      header: "Log-In to comment",
+      message: "You must be signed in to comment on posts",
+      buttons: [
+        {
+          text: "ok",
+        },
+      ],
+    });
+    await alert.present();
+  }
 };
 
-const handlePostComment= () => {
-  commentInput.posted_at= Timestamp.fromDate(new Date());
-  commentInput.location_id= locationId;
-  commentInput.comment_text= commentText.value;
-  commentInput.rating= Number(commentRating.value);
-  postCommentEventHandler(commentInput)
-}
+const handlePostComment = async () => {
+  if (userStore.isLogged) {
+    commentInput.posted_at = Timestamp.fromDate(new Date());
+    commentInput.location_id = locationId;
+    commentInput.comment_text = commentText.value;
+    commentInput.rating = Number(commentRating.value);
+    postCommentEventHandler(commentInput);
+  } else {
+    const alert = await alertController.create({
+      header: "Log-In to comment",
+      message: "You must be signed in to comment on posts",
+      buttons: [
+        {
+          text: "ok",
+        },
+      ],
+    });
+    await alert.present();
+  }
+};
 </script>
 
 <style scoped>
