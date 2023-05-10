@@ -30,7 +30,6 @@
         </template>
         </Carousel>
       </figure>
-      <ReportSubmit :locationId="locationId" />
       <ion-card>
         <ion-card-header class="header">
           <ion-card-title>About {{ locationObj.name }}</ion-card-title>
@@ -49,6 +48,7 @@
       <ion-card>
         CommentCard
       </ion-card>
+      <ReportSubmit :locationId="locationId" />
     </ion-content>
   </ion-page>
 </template>

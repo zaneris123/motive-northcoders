@@ -1,5 +1,5 @@
 <template>
-  <div @click="handleClick">
+  <div v-if="reportEnabled">
     <form @submit.prevent="handleSubmit">
       <ion-item>
         <ion-input
@@ -22,22 +22,31 @@
       <br />
     </form>
   </div>
+  <div class="report-icon" @click="handleReport" v-else>
+    <ion-icon :src="reportIcon"> </ion-icon> Report
+  </div>
 </template>
 
 <script setup>
-import { IonInput, IonButton, alertController, IonItem } from "@ionic/vue";
-import { doc, setDoc } from "firebase/firestore";
+import {
+  IonInput,
+  IonButton,
+  alertController,
+  IonItem,
+  IonIcon,
+} from "@ionic/vue";
+import { collection, addDoc } from "firebase/firestore";
 import { db } from "../utils/connection";
 import { ref, defineProps } from "vue";
 import { useUserStore } from "../stores/user";
-import uniqueId from "../utils/uniqueId";
+import reportIcon from "../assets/reader-outline (3).svg";
 
 const userStore = useUserStore();
 const newReport = ref("");
 const { locationId } = defineProps(["locationId"]);
+const reportEnabled = ref(false);
 
-
-const handleClick = async () => {
+const handleReport = async () => {
   if (!userStore.isLogged) {
     const alert = await alertController.create({
       header: "Please Log-In",
@@ -50,17 +59,30 @@ const handleClick = async () => {
     });
 
     await alert.present();
+  } else {
+    reportEnabled.value = true;
   }
 };
+
+
 const handleSubmit = async () => {
-    const repId = await uniqueId();
-  const reportsDocRef = doc(db, "reports", repId);
-  setDoc(reportsDocRef, {
+  const reportsDocRef = collection(db, "reports");
+  addDoc(reportsDocRef, {
     report_body: newReport.value,
     location_id: locationId,
     user_id: userStore.user.user_id,
   });
+  newReport.value=""
+  const alert = await alertController.create({
+      header: "Request received",
+      message: "Motive team received and will proceed your request",
+      buttons: [
+        {
+          text: "ok",
+        },
+      ],
+    });
+
+    await alert.present();
 };
-
-
 </script>
