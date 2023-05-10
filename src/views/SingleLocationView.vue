@@ -53,6 +53,7 @@
           </section>
         </ion-card-content>
         <CommentSection :key="userStore.isLogged" :locationId="locationId" />
+        <ReportSubmit :key="userStore.isLogged" :locationId="locationId" />
       </ion-card>
     </ion-content>
   </ion-page>
@@ -82,6 +83,7 @@ import { onMounted, ref } from "vue";
 import Carousel from "../components/Carousel.vue";
 import Slide from "../components/Slide.vue";
 import CommentSection from "../components/CommentSection.vue";
+import ReportSubmit from "../components/ReportSubmit.vue";
 import { useUserStore } from "../stores/user";
 
 const route = useRoute();
