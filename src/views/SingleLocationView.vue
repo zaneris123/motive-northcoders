@@ -52,7 +52,7 @@
             </figure>
           </section>
         </ion-card-content>
-        <CommentSection :locationId="locationId" />
+        <CommentSection :key="userStore.isLogged" :locationId="locationId" />
       </ion-card>
     </ion-content>
   </ion-page>
@@ -79,10 +79,10 @@ import { getDoc, doc } from "firebase/firestore";
 import { db } from "../utils/connection";
 import { useRoute } from "vue-router";
 import { onMounted, ref } from "vue";
-
 import Carousel from "../components/Carousel.vue";
 import Slide from "../components/Slide.vue";
 import CommentSection from "../components/CommentSection.vue";
+import { useUserStore } from "../stores/user";
 
 const route = useRoute();
 const locationId = route.params.location_id;
@@ -91,6 +91,7 @@ const locationObj = ref({});
 const author = ref("");
 const staticUrl = ref("");
 const directionUrl = ref("");
+const userStore = useUserStore();
 
 onMounted(async () => {
   const locationDoc = await getDoc(doc(db, "locations", locationId));
