@@ -1,5 +1,5 @@
 <template>
-  <section class="comment">
+  <section class="comment" v-show="!isDeleted">
     <div class="avatar">
       <ion-avatar slot="start">
         <ion-img :src="userInfo.img" alt="user profile picture"></ion-img>
@@ -16,19 +16,32 @@
           postDate.getFullYear()
         }}
       </p>
+      <ion-button v-if="isOwned" @click="deleteComment">
+          <ion-icon slot="end" name="trash-outline"></ion-icon>
+      </ion-button>
     </article>
-  </section>
+</section>
+
 </template>
 
 <script setup>
-import { defineProps, ref } from "vue";
-import { IonAvatar, IonImg } from "@ionic/vue";
-import { doc, getDoc } from "firebase/firestore";
+import { defineProps, ref, onMounted } from "vue";
+import { IonAvatar, IonImg, IonButton } from "@ionic/vue";
+import { doc, getDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../utils/connection";
+import { useUserStore } from "../stores/user";
 
 const { singleCommentData } = defineProps(["singleCommentData"]);
 const postDate = ref(singleCommentData.posted_at.toDate());
 const userInfo = ref({});
+const userStore = useUserStore();
+const isOwned = ref(false)
+const isDeleted = ref(false)
+
+const deleteComment = async () => {
+    await deleteDoc(doc(db, "comments", singleCommentData.commentId));
+    isDeleted.value = true
+}
 
 getDoc(doc(db, "users", singleCommentData.user_id)).then((user) => {
   userInfo.value = {
@@ -36,6 +49,11 @@ getDoc(doc(db, "users", singleCommentData.user_id)).then((user) => {
     img: user.data().img,
   };
 });
+
+onMounted(()=>{
+    isOwned.value= singleCommentData.user_id == userStore.user.user_id;
+})
+
 </script>
 
 <style>
@@ -48,6 +66,9 @@ getDoc(doc(db, "users", singleCommentData.user_id)).then((user) => {
   border-radius: 8px;
   margin-bottom: 16px;
   width: 100%;
+}
+.binbutton{
+color: blueviolet;
 }
 
 .avatar {
