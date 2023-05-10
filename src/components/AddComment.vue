@@ -86,6 +86,9 @@ const handleAddComment = async () => {
 };
 
 const handlePostComment = async () => {
+  commentText.value = "";
+  commentRating.value = "1";
+  addCommentEnabled.value = false;
   commentInput.posted_at = Timestamp.fromDate(new Date());
   commentInput.location_id = locationId;
   commentInput.comment_text = commentText.value;
