@@ -17,7 +17,7 @@
         }}
       </p>
       <ion-button v-if="isOwned" @click="deleteComment">
-          <ion-icon slot="end" name="trash-outline"></ion-icon>
+          <ion-icon :src="trashIcon" name="trash-outline"></ion-icon>
       </ion-button>
     </article>
 </section>
@@ -30,6 +30,8 @@ import { IonAvatar, IonImg, IonButton } from "@ionic/vue";
 import { doc, getDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../utils/connection";
 import { useUserStore } from "../stores/user";
+import trashIcon from "../assets/trash-outline.svg";
+
 
 const { singleCommentData } = defineProps(["singleCommentData"]);
 const postDate = ref(singleCommentData.posted_at.toDate());
@@ -66,9 +68,6 @@ onMounted(()=>{
   border-radius: 8px;
   margin-bottom: 16px;
   width: 100%;
-}
-.binbutton{
-color: blueviolet;
 }
 
 .avatar {
