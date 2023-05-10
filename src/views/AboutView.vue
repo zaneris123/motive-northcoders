@@ -82,8 +82,7 @@ ion-content .welcome-info {
 }
  .bg-image {
     background: url("../../859582.jpg") no-repeat 100% 100%;
-  --background: none
-  
+  --background: none;
 }
 .no-scroll .scroll-content {
   overflow: hidden;
