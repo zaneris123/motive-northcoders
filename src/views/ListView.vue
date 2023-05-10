@@ -28,6 +28,7 @@
       </div>
       <div id="locations-list">
         <ion-card
+          class="card"
           v-for="location in locations"
           :key="location.location_id"
           @click="router.push(`/locations/${location.location_id}`)"
@@ -119,6 +120,7 @@ onMounted(async () => {
   const locationsDocRef = collection(db, "locations");
   const LocDocs = await getDocs(locationsDocRef);
   const allLocations = LocDocs.docs;
+
   const locationsAndAuthors = await Promise.all(
     allLocations.map(async (individualLocation) => {
       const owner = individualLocation.data().posted_by;
@@ -174,6 +176,7 @@ ion-card {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 ion-card figure {
@@ -197,5 +200,8 @@ ion-card ion-card-header {
   flex-direction: column;
   justify-content: center;
   margin-top: 0;
+}
+.card {
+  color: white;
 }
 </style>
