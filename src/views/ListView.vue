@@ -13,10 +13,9 @@
         <ion-spinner />
       </div>
       <div id="filters">
-      <ion-title>Filter:</ion-title>
        <ion-list>
         <ion-item>
-            <ion-select aria-label="Categories Filter" placeholder="Categories" :compareWith="compareWith" @ionChange="categoriesFilter = $event.detail.value" :multiple="true">
+            <ion-select aria-label="Categories Filter" placeholder="Categories" :compareWith="compareWith" @ionChange="categoriesQuery" :multiple="true" v-model="categoriesFilter" > 
               <ion-select-option value="Nature">Nature</ion-select-option>
               <ion-select-option value="Culture">Culture</ion-select-option>
               <ion-select-option value="Scenic Spots">Scenic Spots</ion-select-option>
@@ -26,20 +25,9 @@
             </ion-select>
           </ion-item>
         </ion-list>
-        <ion-list>
-        <ion-item>
-            <ion-select aria-label="Cost Filter" placeholder="Cost" :compareWith="compareWith" @ionChange="costFilter = JSON.stringify($event.detail.value)" :multiple="true">
-              <ion-select-option value="Free">Free</ion-select-option>
-              <ion-select-option value="£">£</ion-select-option>
-              <ion-select-option value="££">££</ion-select-option>
-              <ion-select-option value="£££">£££</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-list>
       </div>
       <div id="locations-list">
         <ion-card
-          v-if="!isFiltered"
           v-for="location in locations"
           :key="location.location_id"
           @click="router.push(`/locations/${location.location_id}`)"
@@ -57,14 +45,13 @@
             >
           </ion-card-header>
         </ion-card>
-        <ion-title v-if="isFiltered">Filtered Locations</ion-title>
       </div>
     </ion-content>
   </ion-page>
 </template>
 
 <script setup>
-import { collection, getDoc, getDocs, doc } from "firebase/firestore";
+import { collection, getDoc, getDocs, doc, query, where } from "firebase/firestore";
 import { db } from "../utils/connection";
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
@@ -91,9 +78,42 @@ const router = useRouter();
 const locations = ref([]);
 const isLoading = ref(true);
 const categoriesFilter = ref([]);
-const costFilter = ref([])
-const isFiltered = ref(false);
-const filteredLocations = ref([])
+
+const categoriesQuery = async () => {
+  if (categoriesFilter.value.length > 0) {
+  locations.value = [];
+  const locationsQuery = await getDocs(query(collection(db, "locations"), where('categories', 'array-contains-any', categoriesFilter.value)));
+  const locationsAndAuthors = await Promise.all(
+  locationsQuery.docs.map(async (individualLocation) => {
+      const owner = individualLocation.data().posted_by;
+      const userRef = await getDoc(doc(db, "users", owner));
+
+      return {
+        location_id: individualLocation.id,
+        locationInfo: individualLocation.data(),
+        author: userRef.data().name,
+      };
+    }))
+  locations.value.push(...locationsAndAuthors);
+  }
+
+  else {
+    locations.value = [];
+  const locationsQuery = await getDocs(collection(db, "locations"));
+  const locationsAndAuthors = await Promise.all(
+  locationsQuery.docs.map(async (individualLocation) => {
+      const owner = individualLocation.data().posted_by;
+      const userRef = await getDoc(doc(db, "users", owner));
+
+      return {
+        location_id: individualLocation.id,
+        locationInfo: individualLocation.data(),
+        author: userRef.data().name,
+      };
+    }))
+  locations.value.push(...locationsAndAuthors);
+  }
+}
 
 onMounted(async () => {
   const locationsDocRef = collection(db, "locations");
@@ -111,21 +131,9 @@ onMounted(async () => {
       };
     })
   );
-
-  if (!isFiltered.value){
     locations.value.push(...locationsAndAuthors);
     isLoading.value = false;
-  }
-
-  else {
-
-    locationsAndAuthors.forEach(location => {
-
-    })
-  }
-  console.log(locations.value[0].locationInfo.categories[0]);
-  console.log(categoriesFilter, '<<< CATEGORIES FILTER');
-  console.log(costFilter, '<<< COST FILTER')
+ 
 });
 </script>
 
