@@ -1,17 +1,15 @@
 <template>
   <ion-card>
     <ion-card-header>
-      <ion-item>
-        <ion-input label="Comment" placeholder="Type your comment here" />
-      </ion-item>
+      <ion-card-title>Comments:</ion-card-title>
     </ion-card-header>
-    <ion-card-content
-      v-for="(singleCommentData, index) in commentArray"
-      :key="index"
-    >
-      <Suspense>
-        <SingleComment :singleCommentData="singleCommentData" />
-      </Suspense>
+    <ion-card-content>
+      <ion-list v-for="(singleCommentData, index) in commentArray" :key="index">
+        <ion-item lines="none">
+          <SingleComment :singleCommentData="singleCommentData" />
+        </ion-item>
+      </ion-list>
+      <AddComment />
     </ion-card-content>
   </ion-card>
 </template>
@@ -22,18 +20,17 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonCardContent,
-  IonInput,
   IonItem,
+  IonList,
 } from "@ionic/vue";
 import SingleComment from "./SingleComment.vue";
-import { onMounted, ref } from "vue";
+import AddComment from "./AddComment.vue";
+import { onMounted, ref, defineProps } from "vue";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { useRoute } from "vue-router";
 import { db } from "../utils/connection";
 
 const commentArray = ref([]);
-const route = useRoute();
-const locationId = route.params.location_id;
+const { locationId } = defineProps(["locationId"]);
 
 onMounted(async () => {
   const commentsQuery = await getDocs(
@@ -44,3 +41,9 @@ onMounted(async () => {
   });
 });
 </script>
+
+<style scoped>
+ion-card {
+  margin-top: 2rem;
+}
+</style>

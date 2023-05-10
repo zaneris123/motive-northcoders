@@ -52,8 +52,8 @@
             </figure>
           </section>
         </ion-card-content>
+        <CommentSection :locationId="locationId" />
       </ion-card>
-      <CommentSection />
     </ion-content>
   </ion-page>
 </template>
