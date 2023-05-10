@@ -30,6 +30,7 @@
         </template>
         </Carousel>
       </figure>
+      <ReportSubmit :locationId="locationId" />
       <ion-card>
         <ion-card-header class="header">
           <ion-card-title>About {{ locationObj.name }}</ion-card-title>
@@ -73,6 +74,7 @@ import { getDoc, doc } from "firebase/firestore";
 import { db } from "../utils/connection";
 import { useRoute } from "vue-router";
 import { onMounted, ref } from "vue";
+import ReportSubmit from "../components/ReportSubmit.vue";
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Navigation, Pagination } from "vue3-carousel";
 
