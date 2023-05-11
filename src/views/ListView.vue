@@ -13,15 +13,26 @@
         <ion-spinner />
       </div>
       <div id="filters">
-       <ion-list>
-        <ion-item>
-            <ion-select aria-label="Categories Filter" placeholder="Categories" :compareWith="compareWith" @ionChange="categoriesQuery" :multiple="true" v-model="categoriesFilter" > 
+        <ion-list>
+          <ion-item>
+            <ion-select
+              aria-label="Categories Filter"
+              placeholder="Categories"
+              :compareWith="compareWith"
+              @ionChange="categoriesQuery"
+              :multiple="true"
+              v-model="categoriesFilter"
+            >
               <ion-select-option value="Nature">Nature</ion-select-option>
               <ion-select-option value="Culture">Culture</ion-select-option>
-              <ion-select-option value="Scenic Spots">Scenic Spots</ion-select-option>
+              <ion-select-option value="Scenic Spots"
+                >Scenic Spots</ion-select-option
+              >
               <ion-select-option value="Outdoor">Outdoor</ion-select-option>
               <ion-select-option value="Adventure">Adventure</ion-select-option>
-              <ion-select-option value="Hike spots">Hike Spots</ion-select-option>
+              <ion-select-option value="Hike spots"
+                >Hike Spots</ion-select-option
+              >
             </ion-select>
           </ion-item>
         </ion-list>
@@ -52,7 +63,14 @@
 </template>
 
 <script setup>
-import { collection, getDoc, getDocs, doc, query, where } from "firebase/firestore";
+import {
+  collection,
+  getDoc,
+  getDocs,
+  doc,
+  query,
+  where,
+} from "firebase/firestore";
 import { db } from "../utils/connection";
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
@@ -69,10 +87,10 @@ import {
   IonCardTitle,
   IonCardSubtitle,
   IonSpinner,
-  IonItem, 
-  IonList, 
-  IonSelect, 
-  IonSelectOption
+  IonItem,
+  IonList,
+  IonSelect,
+  IonSelectOption,
 } from "@ionic/vue";
 
 const router = useRouter();
@@ -82,39 +100,44 @@ const categoriesFilter = ref([]);
 
 const categoriesQuery = async () => {
   if (categoriesFilter.value.length > 0) {
-  locations.value = [];
-  const locationsQuery = await getDocs(query(collection(db, "locations"), where('categories', 'array-contains-any', categoriesFilter.value)));
-  const locationsAndAuthors = await Promise.all(
-  locationsQuery.docs.map(async (individualLocation) => {
-      const owner = individualLocation.data().posted_by;
-      const userRef = await getDoc(doc(db, "users", owner));
-
-      return {
-        location_id: individualLocation.id,
-        locationInfo: individualLocation.data(),
-        author: userRef.data().name,
-      };
-    }))
-  locations.value.push(...locationsAndAuthors);
-  }
-
-  else {
     locations.value = [];
-  const locationsQuery = await getDocs(collection(db, "locations"));
-  const locationsAndAuthors = await Promise.all(
-  locationsQuery.docs.map(async (individualLocation) => {
-      const owner = individualLocation.data().posted_by;
-      const userRef = await getDoc(doc(db, "users", owner));
+    const locationsQuery = await getDocs(
+      query(
+        collection(db, "locations"),
+        where("categories", "array-contains-any", categoriesFilter.value)
+      )
+    );
+    const locationsAndAuthors = await Promise.all(
+      locationsQuery.docs.map(async (individualLocation) => {
+        const owner = individualLocation.data().posted_by;
+        const userRef = await getDoc(doc(db, "users", owner));
 
-      return {
-        location_id: individualLocation.id,
-        locationInfo: individualLocation.data(),
-        author: userRef.data().name,
-      };
-    }))
-  locations.value.push(...locationsAndAuthors);
+        return {
+          location_id: individualLocation.id,
+          locationInfo: individualLocation.data(),
+          author: userRef.data().name,
+        };
+      })
+    );
+    locations.value.push(...locationsAndAuthors);
+  } else {
+    locations.value = [];
+    const locationsQuery = await getDocs(collection(db, "locations"));
+    const locationsAndAuthors = await Promise.all(
+      locationsQuery.docs.map(async (individualLocation) => {
+        const owner = individualLocation.data().posted_by;
+        const userRef = await getDoc(doc(db, "users", owner));
+
+        return {
+          location_id: individualLocation.id,
+          locationInfo: individualLocation.data(),
+          author: userRef.data().name,
+        };
+      })
+    );
+    locations.value.push(...locationsAndAuthors);
   }
-}
+};
 
 onMounted(async () => {
   const locationsDocRef = collection(db, "locations");
@@ -133,9 +156,8 @@ onMounted(async () => {
       };
     })
   );
-    locations.value.push(...locationsAndAuthors);
-    isLoading.value = false;
- 
+  locations.value.push(...locationsAndAuthors);
+  isLoading.value = false;
 });
 </script>
 

@@ -9,10 +9,7 @@
       </ion-toolbar>
     </ion-header>
     <ion-content class="bg-image no-scroll">
-      <div id="spinner" v-if="isLoading">
-        <ion-spinner />
-      </div>
-      <div class="about-info" v-else>
+      <div class="about-info">
         <ion-card class="card">
           <div class="welcome-info">
             <h2>Welcome to Motive</h2>
@@ -69,13 +66,6 @@ import {
   IonHeader,
   IonSpinner,
 } from "@ionic/vue";
-
-import { ref } from "vue";
-const isLoading = ref(true);
-
-setTimeout(() => {
-  isLoading.value = false;
-}, 500);
 </script>
 
 <style scoped>
@@ -86,11 +76,12 @@ setTimeout(() => {
   align-items: center;
 }
 ion-content .welcome-info {
+  font-size: 18px;
   text-align: center;
   margin: 20px;
 }
 .bg-image {
-  background: url("../../859582.jpg") no-repeat 100% 100%;
+  background: url("../assets/859582.jpg") no-repeat 100% 100%;
   --background: none;
 }
 .no-scroll .scroll-content {
