@@ -12,6 +12,7 @@
   "dependencies": {
     "@capacitor/android": "5.0.1",
     "@capacitor/app": "5.0.1",
+    "@capacitor/camera": "^5.0.2",
     "@capacitor/core": "5.0.1",
     "@capacitor/geolocation": "^5.0.1",
     "@capacitor/google-maps": "^5.0.1",

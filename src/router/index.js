@@ -3,6 +3,7 @@ import MapView from "../views/MapView.vue";
 import ListView from "../views/ListView.vue";
 import SingleLocationView from "../views/SingleLocationView.vue";
 import AboutView from "../views/AboutView.vue";
+import PostLocationView from "../views/PostLocationView.vue"
 
 const routes = [
   {
@@ -28,6 +29,11 @@ const routes = [
     path: "/locations/:location_id",
     name: "Single Location",
     component: SingleLocationView,
+  },
+  {
+    path: "/post",
+    name: "post location",
+    component: PostLocationView,
   }
 ];
 
