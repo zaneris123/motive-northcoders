@@ -1,4 +1,5 @@
 <template>
+  <div class="popup">
   <ion-card>
     <figure id="figure">
       <Carousel id="carousel">
@@ -22,6 +23,7 @@
       <ion-card-subtitle>Recommended by {{ owner }}</ion-card-subtitle>
     </ion-card-header>
   </ion-card>
+  </div>
 </template>
 
 <script setup>
@@ -49,23 +51,23 @@ const { locName, owner, images, locId } = defineProps([
 ion-card ion-card-header ion-card-title {
   cursor: pointer;
 }
+
+.popup {
+  width: 60vw;
+  height: 50vh;
+  position: relative;
+  top: -15vh
+}
 .md ion-card {
-  width: 42vw;
-  height: calc(42vw * 0.8);
   cursor: auto;
   border-radius: 18px;
 }
 
 #figure {
   margin: 0;
-  height: 80%;
   width: 100%;
-  margin-bottom: 16px;
 }
 
-.header ion-card-title {
-  margin-top: 16px;
-}
 
 #carousel {
   height: 100%;
