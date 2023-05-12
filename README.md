@@ -20,6 +20,23 @@ Mobile/Desktop social application, allowing users to post/share locations on a i
 - Users can report issues with the application with a report form
 - Users can post locations based on their geolocation
 
+## SETUP
+```
+npm install -g @ionic/cli@latest
+npm install
+```
+FIREBASE Key file setup required:
+```javascript
+/// /src/firebaseConfig.js
+
+export const firebaseConfig = {
+  apiKey: //API KEY HERE,
+  authDomain: //AUTHDOMAIN,
+  projectId: //PROJECT ID
+};
+
+```
+
 ## Screenshots
 ![Screenshot from 2023-05-12 10-04-59](https://github.com/zaneris123/motive-northcoders/assets/90579132/129296d9-6588-46a2-97e3-88148022e380)
 ![Screenshot from 2023-05-12 10-05-12](https://github.com/zaneris123/motive-northcoders/assets/90579132/9475d2cb-7ad5-43fd-a3e0-0e3466baf210)
