@@ -85,6 +85,7 @@ import Slide from "../components/Slide.vue";
 import CommentSection from "../components/CommentSection.vue";
 import ReportSubmit from "../components/ReportSubmit.vue";
 import { useUserStore } from "../stores/user";
+import { firebaseConfig } from "../firebaseConfig";
 
 const route = useRoute();
 const locationId = route.params.location_id;
@@ -108,7 +109,7 @@ onMounted(async () => {
     locationDoc.data().location.latitude
   },${
     locationDoc.data().location.longitude
-  }&zoom=14&key=AIzaSyAdWE-2tjyP_CSputOmiYZr_pdOfEDJTW4`;
+  }&zoom=14&key=${firebaseConfig.apiKey}`;
   directionUrl.value = `https://www.google.com/maps/search/?api=1&query=${
     locationDoc.data().location.latitude
   }%2C${locationDoc.data().location.longitude}`;

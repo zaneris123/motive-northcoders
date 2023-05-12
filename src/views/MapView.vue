@@ -43,6 +43,7 @@ import {
 import { collection, doc, getDocs, getDoc } from "firebase/firestore";
 import { db } from "../utils/connection";
 import LocationCard from "../components/LocationCard.vue";
+import { firebaseConfig } from "../firebaseConfig";
 
 const isLoading = ref(true);
 const locId = ref("");
@@ -59,7 +60,7 @@ onMounted(async () => {
   const newMap = await GoogleMap.create({
     id: "my-map",
     element: mapRef,
-    apiKey: "AIzaSyDotPJWfQDAHGbd9S7792H5Ds7DpiVgFlw",
+    apiKey: firebaseConfig.apiKey,
     config: {
       center: {
         lat: coordinates.coords.latitude,

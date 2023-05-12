@@ -38,6 +38,7 @@ import {
 import { Geolocation } from "@capacitor/geolocation";
 import { onMounted, ref } from "vue";
 import { Camera, CameraResultType } from "@capacitor/camera";
+import { firebaseConfig } from "../firebaseConfig";
 
 const staticMapUrl = ref("");
 const locationTitle = ref("");
@@ -55,7 +56,7 @@ const takePicture = async () => {
 };
 onMounted(async () => {
   const coordinates = await Geolocation.getCurrentPosition();
-  staticMapUrl.value = `https://maps.googleapis.com/maps/api/staticmap?size=1920x1920&maptype=roadmap\&markers=size:mid%7Ccolor:red%7C${coordinates.coords.latitude},${coordinates.coords.longitude}&zoom=14&key=AIzaSyAdWE-2tjyP_CSputOmiYZr_pdOfEDJTW4`;
+  staticMapUrl.value = `https://maps.googleapis.com/maps/api/staticmap?size=1920x1920&maptype=roadmap\&markers=size:mid%7Ccolor:red%7C${coordinates.coords.latitude},${coordinates.coords.longitude}&zoom=14&key=${firebaseConfig.apiKey}`;
 });
 </script>
 
