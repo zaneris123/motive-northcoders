@@ -53,6 +53,11 @@ ion-card {
   margin: 0;
 }
 
+ion-card ion-card-header {
+  background-color: rgb(74, 74, 74);
+  height: 100%;
+}
+
 ion-card ion-card-header #location-name {
   cursor: pointer;
 }
@@ -62,7 +67,7 @@ ion-card figure #carousel {
   height: 35vh;
 }
 
-ion-card figure #carousel .carousel-item {
+#carousel .carousel-item {
   position: absolute;
   top: 0;
   left: 0;
@@ -71,8 +76,8 @@ ion-card figure #carousel .carousel-item {
   height: 100%;
 }
 
-ion-card figure #carousel .carousel-item img {
+#carousel .carousel-item img {
   min-width: 100%;
-  height: 100%;
+  height: 75%;
 }
 </style>
