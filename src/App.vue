@@ -66,7 +66,7 @@
               "
             >
               <ion-icon :src="addIcon" />
-              <ion-label> New Motive</ion-label></ion-item
+              <ion-label>New Motive</ion-label></ion-item
             >
             <ion-item
               id="logout"
