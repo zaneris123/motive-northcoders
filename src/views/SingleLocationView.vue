@@ -104,7 +104,6 @@ onMounted(async () => {
 
   locationObj.value = locationDoc.data();
   author.value = locationOwner.data().name;
-  isLoading.value = false;
   staticUrl.value = `https://maps.googleapis.com/maps/api/staticmap?size=1024x512&maptype=roadmap\&markers=size:mid%7Ccolor:red%7C${
     locationDoc.data().location.latitude
   },${locationDoc.data().location.longitude}&zoom=14&key=${
@@ -113,6 +112,7 @@ onMounted(async () => {
   directionUrl.value = `https://www.google.com/maps/search/?api=1&query=${
     locationDoc.data().location.latitude
   }%2C${locationDoc.data().location.longitude}`;
+  isLoading.value = false;
 });
 </script>
 
