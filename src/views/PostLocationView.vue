@@ -123,12 +123,11 @@ const takePicture = async () => {
     resultType: CameraResultType.Base64,
   });
   uploadedImgArr.value.push(image);
-  console.log(uploadedImgArr.value);
 };
 
 onMounted(async () => {
-  // const coordinates = await Geolocation.getCurrentPosition();
-  staticMapUrl.value = `https://maps.googleapis.com/maps/api/staticmap?size=1920x1920&maptype=roadmap\&markers=size:mid%7Ccolor:red%7C51.504444,-0.086465&zoom=14&key=${firebaseConfig.apiKey}`;
+  const coordinates = await Geolocation.getCurrentPosition();
+  staticMapUrl.value = `https://maps.googleapis.com/maps/api/staticmap?size=1920x1920&maptype=roadmap\&markers=size:mid%7Ccolor:red%7C${coordinates.coords.latitude},${coordinates.coords.longitude}&zoom=14&key=${firebaseConfig.apiKey}`;
   isLoading.value = false;
 });
 
@@ -141,7 +140,7 @@ const handleSubmit = async () => {
         {
           text: "ok",
           handler: () => {
-            router.go();
+            router.push("/locations");
           },
         },
       ],
