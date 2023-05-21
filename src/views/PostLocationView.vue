@@ -106,6 +106,7 @@ import { onMounted, ref } from "vue";
 import { Camera, CameraResultType } from "@capacitor/camera";
 import { useUserStore } from "../stores/user";
 import { useRouter } from "vue-router";
+import { firebaseConfig } from "../firebaseConfig";
 
 const router = useRouter();
 const userStore = useUserStore();
@@ -127,7 +128,7 @@ const takePicture = async () => {
 
 onMounted(async () => {
   // const coordinates = await Geolocation.getCurrentPosition();
-  staticMapUrl.value = `https://maps.googleapis.com/maps/api/staticmap?size=1920x1920&maptype=roadmap\&markers=size:mid%7Ccolor:red%7C51.504444,-0.086465&zoom=14&key=AIzaSyAdWE-2tjyP_CSputOmiYZr_pdOfEDJTW4`;
+  staticMapUrl.value = `https://maps.googleapis.com/maps/api/staticmap?size=1920x1920&maptype=roadmap\&markers=size:mid%7Ccolor:red%7C51.504444,-0.086465&zoom=14&key=${firebaseConfig.apiKey}`;
   isLoading.value = false;
 });
 
