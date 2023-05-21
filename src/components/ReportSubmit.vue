@@ -71,8 +71,9 @@ const handleSubmit = async () => {
   });
   newReport.value = "";
   const alert = await alertController.create({
-    header: "Request received",
-    message: "Motive team received and will proceed your request",
+    header: "Report submitted",
+    message:
+      "The Motive team has received your report and will process your request",
     buttons: [
       {
         text: "ok",
