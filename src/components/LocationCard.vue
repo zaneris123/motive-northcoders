@@ -1,29 +1,23 @@
 <template>
-  <div class="popup">
   <ion-card>
     <figure id="figure">
-      <Carousel id="carousel">
+      <Carousel :locationId="locId" id="carousel" v-slot="{ currentSlide }">
         <Slide v-for="(image, index) in images" :key="index">
-          <img
-            class="carousel__item"
-            alt="location visual representation"
-            :src="image"
-          />
+          <div v-show="currentSlide === index + 1" class="carousel-item">
+            <img alt="location visual representation" :src="image" />
+          </div>
         </Slide>
-        <template #addons>
-          <Navigation />
-          <Pagination />
-        </template>
       </Carousel>
     </figure>
     <ion-card-header class="header">
-      <ion-card-title @click="router.push(`/locations/${locId}`)">{{
-        locName
-      }}</ion-card-title>
+      <ion-card-title
+        id="location-name"
+        @click="router.push(`/locations/${locId}`)"
+        >{{ locName }}</ion-card-title
+      >
       <ion-card-subtitle>Recommended by {{ owner }}</ion-card-subtitle>
     </ion-card-header>
   </ion-card>
-  </div>
 </template>
 
 <script setup>
@@ -35,8 +29,8 @@ import {
 } from "@ionic/vue";
 import { defineProps } from "vue";
 import { useRouter } from "vue-router";
-import "vue3-carousel/dist/carousel.css";
-import { Carousel, Slide, Navigation, Pagination } from "vue3-carousel";
+import Carousel from "./LocCardCarousel.vue";
+import Slide from "./LocCardSlide.vue";
 
 const router = useRouter();
 const { locName, owner, images, locId } = defineProps([
@@ -48,33 +42,37 @@ const { locName, owner, images, locId } = defineProps([
 </script>
 
 <style scoped>
-ion-card ion-card-header ion-card-title {
-  cursor: pointer;
-}
-
-.popup {
-  width: 60vw;
-  height: 50vh;
-  position: relative;
-  top: -15vh
-}
-.md ion-card {
+ion-card {
+  width: 50%;
+  height: 50%;
   cursor: auto;
   border-radius: 18px;
 }
 
 #figure {
   margin: 0;
-  width: 100%;
 }
 
+ion-card ion-card-header #location-name {
+  cursor: pointer;
+}
 
-#carousel {
+ion-card figure #carousel {
+  max-height: 35vh;
+  height: 35vh;
+}
+
+ion-card figure #carousel .carousel-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-height: 100%;
   height: 100%;
 }
 
-.carousel__item {
-  max-width: 100%;
-  max-height: 100%;
+ion-card figure #carousel .carousel-item img {
+  min-width: 100%;
+  height: 100%;
 }
 </style>
