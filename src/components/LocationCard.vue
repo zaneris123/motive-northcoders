@@ -30,7 +30,7 @@ import {
 import { defineProps } from "vue";
 import { useRouter } from "vue-router";
 import Carousel from "./LocCardCarousel.vue";
-import Slide from "./LocCardSlide.vue";
+import Slide from "./Slide.vue";
 
 const router = useRouter();
 const { locName, owner, images, locId } = defineProps([
