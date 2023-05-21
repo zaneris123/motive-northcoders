@@ -178,7 +178,8 @@ ion-content #locations-list {
   flex-direction: row;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  gap: 40px;
+  margin: 20px auto;
 }
 
 ion-content #locations-list :hover {
@@ -191,12 +192,9 @@ ion-content #locations-list ion-card :hover {
 
 ion-card {
   height: 50vh;
+  width: 30vw;
   cursor: pointer;
   border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
