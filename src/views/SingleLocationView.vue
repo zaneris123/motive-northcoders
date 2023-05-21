@@ -148,7 +148,7 @@ ion-content figure .carousel .slide-info {
 }
 ion-content figure .carousel .slide-info img {
   min-width: 100%;
-  height: 100%;
+  height: 50%;
 }
 
 .card {

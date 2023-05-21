@@ -74,7 +74,7 @@ onBeforeMount(async () => {
 <style scoped>
 .navigate {
   padding: 0 16px;
-  height: 100%;
+  height: 50%;
   width: 100%;
   position: absolute;
   display: flex;
@@ -107,7 +107,7 @@ i {
 
 .pagination {
   position: absolute;
-  bottom: 24px;
+  top: 45%;
   width: 100%;
   display: flex;
   gap: 16px;

@@ -32,8 +32,6 @@ import { getDoc, doc } from "firebase/firestore";
 const { locationId } = defineProps(["locationId"]);
 const currentSlide = ref(1);
 const getSlideCount = ref(null);
-const autoPlayEnabled = ref(true);
-const timeoutDuration = ref(3000);
 
 const nextSlide = () => {
   if (currentSlide.value === getSlideCount.value) {
@@ -54,16 +52,6 @@ const previouSlide = () => {
 const goToSlide = (index) => {
   currentSlide.value = index + 1;
 };
-
-const autoPlay = () => {
-  setInterval(() => {
-    nextSlide();
-  }, timeoutDuration.value);
-};
-
-if (autoPlayEnabled.value) {
-  autoPlay();
-}
 
 onBeforeMount(async () => {
   const locationDoc = await getDoc(doc(db, "locations", locationId));
