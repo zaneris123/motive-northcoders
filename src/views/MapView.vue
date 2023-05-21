@@ -59,7 +59,7 @@ onMounted(async () => {
   const newMap = await GoogleMap.create({
     id: "my-map",
     element: mapRef,
-    apiKey: "AIzaSyDotPJWfQDAHGbd9S7792H5Ds7DpiVgFlw",
+    apiKey: "AIzaSyC31AfOIO0fxAQRiY60qQVH5VS-vI2b9ss",
     config: {
       center: {
         lat: coordinates.coords.latitude,
