@@ -18,7 +18,6 @@
             <ion-select
               aria-label="Categories Filter"
               placeholder="Categories"
-              :compareWith="compareWith"
               @ionChange="categoriesQuery"
               :multiple="true"
               v-model="categoriesFilter"
