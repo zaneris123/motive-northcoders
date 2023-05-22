@@ -149,7 +149,7 @@ const handleSubmit = async () => {
     await alert.present();
   } else {
     const alert = await alertController.create({
-      header: "Post Submited successfully",
+      header: "Post Submitted successfully",
       message: "The secret location has been succesfully submitted",
       buttons: [
         {

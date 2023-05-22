@@ -105,7 +105,6 @@ import TwitterLogInButton from "./components/TwitterLogInButton.vue";
 import FbLoginButton from "./components/FbLoginButton.vue";
 import LoggedUser from "./components/LoggedUser.vue";
 import { useUserStore } from "./stores/user";
-import heart from "./assets/heart-outline.svg";
 import addIcon from "./assets/add-outline.svg";
 
 const userStore = useUserStore();
