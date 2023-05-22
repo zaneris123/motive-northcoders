@@ -16,7 +16,7 @@
             <ion-item
               lines="none"
               :class="
-                currentPath.startsWith('/map') ? 'selected' : 'not_active'
+                route.path.startsWith('/map') ? 'selected' : 'not_active'
               "
               @click="goTo('/map')"
               ><ion-label>Motive Map</ion-label></ion-item
@@ -24,7 +24,7 @@
             <ion-item
               lines="none"
               :class="
-                currentPath.startsWith('/locations') ? 'selected' : 'not_active'
+                route.path.startsWith('/locations') ? 'selected' : 'not_active'
               "
               @click="goTo('/locations')"
               ><ion-label>Motive List</ion-label></ion-item
@@ -32,7 +32,7 @@
             <ion-item
               lines="none"
               :class="
-                currentPath.startsWith('/about') ? 'selected' : 'not_active'
+                route.path.startsWith('/about') ? 'selected' : 'not_active'
               "
               @click="goTo('/about')"
               ><ion-label>About</ion-label></ion-item
@@ -62,7 +62,7 @@
               lines="none"
               @click="goTo('/post')"
               :class="
-                currentPath.startsWith('/post') ? 'selected' : 'not_active'
+                route.path.startsWith('/post') ? 'selected' : 'not_active'
               "
             >
               <ion-icon :src="addIcon" />
@@ -99,7 +99,6 @@ import {
   alertController,
 } from "@ionic/vue";
 import { useRoute, useRouter } from "vue-router";
-import { ref } from "vue";
 import GoogleLoginButton from "./components/GoogleLogInButton.vue";
 import TwitterLogInButton from "./components/TwitterLogInButton.vue";
 import FbLoginButton from "./components/FbLoginButton.vue";
@@ -110,7 +109,6 @@ import addIcon from "./assets/add-outline.svg";
 const userStore = useUserStore();
 const route = useRoute();
 const router = useRouter();
-const currentPath = ref(route.path);
 
 const showAlert = async () => {
   const alert = await alertController.create({
