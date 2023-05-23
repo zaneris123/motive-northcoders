@@ -11,19 +11,19 @@
         <br />
         <ion-radio-group v-model="commentRating">
           <ion-item>
-            <ion-radio>1</ion-radio>
+            <ion-radio value="1">1</ion-radio>
           </ion-item>
           <ion-item>
-            <ion-radio>2</ion-radio>
+            <ion-radio value="2">2</ion-radio>
           </ion-item>
           <ion-item>
-            <ion-radio>3</ion-radio>
+            <ion-radio value="3">3</ion-radio>
           </ion-item>
           <ion-item>
-            <ion-radio>4</ion-radio>
+            <ion-radio value="4">4</ion-radio>
           </ion-item>
           <ion-item>
-            <ion-radio>5</ion-radio>
+            <ion-radio value="5">5</ion-radio>
           </ion-item>
         </ion-radio-group>
       </ion-item>

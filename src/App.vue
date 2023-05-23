@@ -15,9 +15,7 @@
             <ion-list-header>Menu</ion-list-header>
             <ion-item
               lines="none"
-              :class="
-                route.path.startsWith('/map') ? 'selected' : 'not_active'
-              "
+              :class="route.path.startsWith('/map') ? 'selected' : 'not_active'"
               @click="goTo('/map')"
               ><ion-label>Motive Map</ion-label></ion-item
             >
@@ -133,7 +131,6 @@ const showAlert = async () => {
 
 const goTo = (goalPath) => {
   router.push(goalPath);
-  currentPath.value = goalPath;
 };
 </script>
 

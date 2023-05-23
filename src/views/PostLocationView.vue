@@ -24,24 +24,27 @@
           <ion-list>
             <ion-item>
               <ion-select
-                aria-label="Fruit"
+                aria-label="categories"
                 interface="popover"
                 placeholder="Categories"
                 :multiple="true"
+                v-model="locationCategories"
               >
-                <ion-select-option value="apples">Adventure</ion-select-option>
-                <ion-select-option value="oranges">Culture</ion-select-option>
-                <ion-select-option value="bananas">Fun</ion-select-option>
-                <ion-select-option value="hike spots"
+                <ion-select-option value="Adventure"
+                  >Adventure</ion-select-option
+                >
+                <ion-select-option value="Culture">Culture</ion-select-option>
+                <ion-select-option value="Fun">Fun</ion-select-option>
+                <ion-select-option value="Hike spots"
                   >Hike spots</ion-select-option
                 >
-                <ion-select-option value="leisure">Leisure</ion-select-option>
-                <ion-select-option value="nature">Nature</ion-select-option>
-                <ion-select-option value="outdoors">Outdoors</ion-select-option>
-                <ion-select-option value="scenic spots"
+                <ion-select-option value="Leisure">Leisure</ion-select-option>
+                <ion-select-option value="Nature">Nature</ion-select-option>
+                <ion-select-option value="Outdoors">Outdoors</ion-select-option>
+                <ion-select-option value="Scenic spots"
                   >Scenic spots</ion-select-option
                 >
-                <ion-select-option value="wild">Wild</ion-select-option>
+                <ion-select-option value="Wild">Wild</ion-select-option>
               </ion-select>
             </ion-item>
             <ion-item>
@@ -49,6 +52,7 @@
                 aria-label="Fruit"
                 interface="popover"
                 placeholder="Cost"
+                v-model="locationCost"
               >
                 <ion-select-option value="free">Free</ion-select-option>
                 <ion-select-option value="£">£</ion-select-option>
@@ -107,6 +111,15 @@ import { Camera, CameraResultType } from "@capacitor/camera";
 import { useUserStore } from "../stores/user";
 import { useRouter } from "vue-router";
 import { firebaseConfig } from "../firebaseConfig";
+import {
+  addDoc,
+  collection,
+  GeoPoint,
+  updateDoc,
+  doc,
+} from "firebase/firestore";
+import { db } from "../utils/connection";
+import { uploadImage } from "../utils/uploadImage";
 
 const router = useRouter();
 const userStore = useUserStore();
@@ -114,20 +127,24 @@ const isLoading = ref(true);
 const staticMapUrl = ref("");
 const locationTitle = ref("");
 const locationDescription = ref("");
+const locationCost = ref("");
+const locationCategories = ref([]);
+const coordinates = ref({});
 const uploadedImgArr = ref([]);
 
 const takePicture = async () => {
   const image = await Camera.getPhoto({
     quality: 90,
     allowEditing: true,
-    resultType: CameraResultType.Base64,
+    resultType: CameraResultType.DataUrl,
   });
-  uploadedImgArr.value.push(image);
+
+  uploadedImgArr.value.push(image.dataUrl);
 };
 
 onMounted(async () => {
-  const coordinates = await Geolocation.getCurrentPosition();
-  staticMapUrl.value = `https://maps.googleapis.com/maps/api/staticmap?size=1920x1920&maptype=roadmap\&markers=size:mid%7Ccolor:red%7C${coordinates.coords.latitude},${coordinates.coords.longitude}&zoom=14&key=${firebaseConfig.apiKey}`;
+  coordinates.value = await Geolocation.getCurrentPosition();
+  staticMapUrl.value = `https://maps.googleapis.com/maps/api/staticmap?size=1920x1920&maptype=roadmap\&markers=size:mid%7Ccolor:red%7C${coordinates.value.coords.latitude},${coordinates.value.coords.longitude}&zoom=14&key=${firebaseConfig.apiKey}`;
   isLoading.value = false;
 });
 
@@ -148,6 +165,28 @@ const handleSubmit = async () => {
 
     await alert.present();
   } else {
+    isLoading.value = true;
+
+    const locDocRef = collection(db, "locations");
+
+    const docRef = await addDoc(locDocRef, {
+      name: locationTitle.value,
+      description: locationDescription.value,
+      posted_by: userStore.user.user_id,
+      location: new GeoPoint(
+        coordinates.value.coords.latitude,
+        coordinates.value.coords.longitude
+      ),
+      cost: locationCost.value,
+      categories: locationCategories.value,
+    });
+
+    const uploadedImages = await uploadImage(uploadedImgArr.value, docRef.id);
+
+    await updateDoc(doc(db, "locations", docRef.id), {
+      image: uploadedImages,
+    });
+
     const alert = await alertController.create({
       header: "Post Submitted successfully",
       message: "The secret location has been succesfully submitted",
@@ -156,10 +195,17 @@ const handleSubmit = async () => {
           text: "ok",
           handler: () => {
             router.push("/locations");
+            locationTitle.value = "";
+            locationDescription.value = "";
+            locationCategories.value = [];
+            locationCost.value = "";
+            uploadedImgArr.value = [];
           },
         },
       ],
     });
+
+    isLoading.value = false;
 
     await alert.present();
   }
