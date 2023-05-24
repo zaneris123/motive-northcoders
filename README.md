@@ -49,13 +49,13 @@ A logged user, besides the previous features, is also ablte to:
 
 ## Demo (Mobile)
 
-![screenshot](./motive-app-media-mobile/Screenshot%202023-05-23%20at%2023.03.54.png)
-![screenshot](./motive-app-media-mobile/Screenshot%202023-05-23%20at%2023.04.10.png)
-![screenshot](./motive-app-media-mobile/Screenshot%202023-05-23%20at%2023.04.23.png)
-![screenshot](./motive-app-media-mobile/Screenshot%202023-05-23%20at%2023.04.30.png)
-![screenshot](./motive-app-media-mobile/Screenshot%202023-05-23%20at%2023.04.50.png)
-![screenshot](./motive-app-media-mobile/Screenshot%202023-05-23%20at%2023.05.01.png)
-![screenshot](./motive-app-media-mobile/Screenshot%202023-05-23%20at%2023.05.07.png)
+![screenshot](https://firebasestorage.googleapis.com/v0/b/motive-media.appspot.com/o/motive-mobile-media%2FScreenshot%202023-05-23%20at%2023.03.54.png?alt=media&token=819a547b-978b-4b27-8a15-619915aa865a)
+![screenshot](https://firebasestorage.googleapis.com/v0/b/motive-media.appspot.com/o/motive-mobile-media%2FScreenshot%202023-05-23%20at%2023.04.10.png?alt=media&token=62ce864b-7241-48f6-8c71-d81a0488acda)
+![screenshot](https://firebasestorage.googleapis.com/v0/b/motive-media.appspot.com/o/motive-mobile-media%2FScreenshot%202023-05-23%20at%2023.04.23.png?alt=media&token=94074afb-4603-45a0-8a1d-47264d3cd8cc)
+![screenshot](https://firebasestorage.googleapis.com/v0/b/motive-media.appspot.com/o/motive-mobile-media%2FScreenshot%202023-05-23%20at%2023.04.30.png?alt=media&token=97ee1a7f-b1bc-46b5-bc00-ad7e098419f1)
+![screenshot](https://firebasestorage.googleapis.com/v0/b/motive-media.appspot.com/o/motive-mobile-media%2FScreenshot%202023-05-23%20at%2023.04.50.png?alt=media&token=ad7aa1e2-e042-4842-b070-6825ef1c986a)
+![screenshot](https://firebasestorage.googleapis.com/v0/b/motive-media.appspot.com/o/motive-mobile-media%2FScreenshot%202023-05-23%20at%2023.05.01.png?alt=media&token=7a5e1d7c-a461-4c5f-915e-22b5e9b56f2e)
+![screenshot](https://firebasestorage.googleapis.com/v0/b/motive-media.appspot.com/o/motive-mobile-media%2FScreenshot%202023-05-23%20at%2023.05.07.png?alt=media&token=aea67ebe-802e-4a2b-bbb6-33be31f10f10)
 
 </div>
 
