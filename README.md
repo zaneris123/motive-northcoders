@@ -118,3 +118,21 @@ ionic serve
 ```
 ionic build
 ```
+
+## Tech Stack
+
+- [Vue](https://vuejs.org/): JavaScript framework for building user interfaces.
+- [Ionic](https://ionicframework.com/): An open source mobile UI toolkit for building modern, high quality cross-platform mobile apps from a single code base.
+- [Capacitor](https://capacitorjs.com/): An open source native runtime for building Web Native apps. Create cross-platform iOS, Android, and Progressive Web Apps with JavaScript, HTML, and CSS.
+- [Firebase Cloud Firestore](https://firebase.google.com/docs/firestore): Flexible, scalable database for mobile, web, and server development.
+- [Firebase Authentication](https://firebase.google.com/docs/auth): To authenticate users to the app using identity providers in this case like Google, Twitter and Facebook.
+- [Firebase Cloud Storage](https://firebase.google.com/docs/storage): A powerful, simple, and cost-effective object storage service.
+- [Google Maps API](https://developers.google.com/maps): To display the interactive map view with the corresponding markers.
+
+## Team members
+
+- [Bobby Nagra](https://github.com/bobbynagra92)
+- [Roisin Long](https://github.com/Roisinlo)
+- [Akashdeep Singh Kaur](https://github.com/akashdeep931)
+- [Inna Chtej](https://github.com/xtej4ik)
+- [Zain Shah](https://github.com/zaneris123)
