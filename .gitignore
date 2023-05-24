@@ -31,3 +31,5 @@ npm-debug.log*
 /plugins
 /www
 /src/firebaseConfig.js
+/motive-app-media
+/motive-app-media-mobile
