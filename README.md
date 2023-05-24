@@ -99,8 +99,6 @@ export const firebaseConfig = {
   authDomain: // AUTHDOMAIN,
   projectId: // PROJECT_ID,
   storageBucket: // PROJECT_ID.appspot.com
-};
-
 ```
 
 Once done, you will have the following scripts to run and deploy the app.

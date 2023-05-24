@@ -108,6 +108,7 @@ import {
 import { Geolocation } from "@capacitor/geolocation";
 import { onMounted, ref } from "vue";
 import { Camera, CameraResultType } from "@capacitor/camera";
+
 import { useUserStore } from "../stores/user";
 import { useRouter } from "vue-router";
 import { firebaseConfig } from "../firebaseConfig";
