@@ -1,49 +1,136 @@
-# motive-northcoders
-Mobile/Desktop social application, allowing users to post/share locations on a interfaceable Map,
-### Tech Stacks Included
-- Javascript
-- Vue Framework
-- Firebase
-- Firestore Databasing
-- Google maps API
-- Ionic
-- Capacitor
+<div align="center">
 
-### Functionality included
-- View shared locations in a Map view
-- View shared locations in a List view
-- Interact with markers on the map to find more information about locations
-- Click individual locations from the list to find more information about locations
-- Filter locations in the list view by category
-- User login functionality using different platforms ( GOOGLE, FACEBOOK, TWITTER)
-- Users can post and delete comments for individual locations
-- Users can report issues with the application with a report form
-- Users can post locations based on their geolocation
+![Logo](./src/assets/1.svg)
 
-## SETUP
+</div>
+
+# MOTIVE APP
+
+## Description
+
+This is a Mobile/Web social application that helps people to find the best hidden gems throughout the UK.
+
+Using this app, a user is able to:
+
+```
+- Navigate through a map to check the hidden gems.
+- Navigate through a list to achieve the same thing.
+- Filter that list by categories.
+- View individual hotspots/activities with their details such as images, description, categories, price, location, comments, and so on.
+- Get the direction to that location.
+- Sign up with Google, Twitter or Facebook.
+```
+
+A logged user, besides the previous features, is also ablte to:
+
+```
+- Log out.
+- Comment on a secret hotspot.
+- Add rating to that secret location.
+- Report innapropiate content.
+- Post new locations as long as the user is in the same location as the added place.
+```
+
+**_NOTE:_** The app can be deployed for mobile, however the styling is not currently responsive, it will be fixed ASAP since it is still in development and more features are coming soon.
+
+<div align="center">
+
+## Demo (Web)
+
+![screenshot](https://firebasestorage.googleapis.com/v0/b/motive-media.appspot.com/o/motive-web-media%2FScreenshot%202023-05-23%20at%2022.46.19.png?alt=media&token=75b95056-cb5a-47aa-9e95-7683ecd16422)
+![screenshot](https://firebasestorage.googleapis.com/v0/b/motive-media.appspot.com/o/motive-web-media%2FScreenshot%202023-05-23%20at%2022.47.07.png?alt=media&token=5aecb052-afdc-48b8-9ddd-1e9786e0d4d7)
+![screenshot](https://firebasestorage.googleapis.com/v0/b/motive-media.appspot.com/o/motive-web-media%2FScreenshot%202023-05-23%20at%2022.45.23.png?alt=media&token=1d462b7b-c11c-487b-b8e4-8eb1db333f10)
+![screenshot](https://firebasestorage.googleapis.com/v0/b/motive-media.appspot.com/o/motive-web-media%2FScreenshot%202023-05-23%20at%2022.47.39.png?alt=media&token=1396a452-7801-465d-9332-c975ab086099)
+![screenshot](https://firebasestorage.googleapis.com/v0/b/motive-media.appspot.com/o/motive-web-media%2FScreenshot%202023-05-23%20at%2022.48.06.png?alt=media&token=f14a21d7-1dd3-4c80-ade4-5d58d78e84f8)
+![screenshot](https://firebasestorage.googleapis.com/v0/b/motive-media.appspot.com/o/motive-web-media%2FScreenshot%202023-05-23%20at%2022.48.22.png?alt=media&token=b5e8fd3a-f745-4cf2-88fa-303e963638fb)
+![screenshot](https://firebasestorage.googleapis.com/v0/b/motive-media.appspot.com/o/motive-web-media%2FScreenshot%202023-05-23%20at%2022.48.31.png?alt=media&token=b0f9e64c-4c8f-493a-a80f-13a364627e4e)
+![screenshot](https://firebasestorage.googleapis.com/v0/b/motive-media.appspot.com/o/motive-web-media%2FScreenshot%202023-05-23%20at%2022.48.55.png?alt=media&token=baa33643-d1e6-4acb-bf8a-bbb37120d85a)
+![screenshot](https://firebasestorage.googleapis.com/v0/b/motive-media.appspot.com/o/motive-web-media%2FScreenshot%202023-05-23%20at%2022.49.31.png?alt=media&token=4eb5e902-2bff-42d2-9b92-8dac3af11284)
+
+## Demo (Mobile)
+
+![screenshot](https://firebasestorage.googleapis.com/v0/b/motive-media.appspot.com/o/motive-mobile-media%2FScreenshot%202023-05-23%20at%2023.03.54.png?alt=media&token=819a547b-978b-4b27-8a15-619915aa865a)
+![screenshot](https://firebasestorage.googleapis.com/v0/b/motive-media.appspot.com/o/motive-mobile-media%2FScreenshot%202023-05-23%20at%2023.04.10.png?alt=media&token=62ce864b-7241-48f6-8c71-d81a0488acda)
+![screenshot](https://firebasestorage.googleapis.com/v0/b/motive-media.appspot.com/o/motive-mobile-media%2FScreenshot%202023-05-23%20at%2023.04.23.png?alt=media&token=94074afb-4603-45a0-8a1d-47264d3cd8cc)
+![screenshot](https://firebasestorage.googleapis.com/v0/b/motive-media.appspot.com/o/motive-mobile-media%2FScreenshot%202023-05-23%20at%2023.04.30.png?alt=media&token=97ee1a7f-b1bc-46b5-bc00-ad7e098419f1)
+![screenshot](https://firebasestorage.googleapis.com/v0/b/motive-media.appspot.com/o/motive-mobile-media%2FScreenshot%202023-05-23%20at%2023.04.50.png?alt=media&token=ad7aa1e2-e042-4842-b070-6825ef1c986a)
+![screenshot](https://firebasestorage.googleapis.com/v0/b/motive-media.appspot.com/o/motive-mobile-media%2FScreenshot%202023-05-23%20at%2023.05.01.png?alt=media&token=7a5e1d7c-a461-4c5f-915e-22b5e9b56f2e)
+![screenshot](https://firebasestorage.googleapis.com/v0/b/motive-media.appspot.com/o/motive-mobile-media%2FScreenshot%202023-05-23%20at%2023.05.07.png?alt=media&token=aea67ebe-802e-4a2b-bbb6-33be31f10f10)
+
+</div>
+
+## Installation and Set-up
+
+To run the project locally follow these steps:
+
+1. Fork [this](https://github.com/zaneris123/motive-northcoders.git) repository.
+
+2. Clone your forked copy of repo
+
+```
+git clone https://github.com/<your-github-username>/motive-northcoders.git
+```
+
+3. Install ionic CLI
+
 ```
 npm install -g @ionic/cli@latest
+```
+
+4. Install dependencies
+
+```
+npm i
+```
+
+or
+
+```
 npm install
 ```
-FIREBASE Key file setup required:
-```javascript
+
+5. Setup Firebase configuration file
+
+```
 /// /src/firebaseConfig.js
 
 export const firebaseConfig = {
-  apiKey: //API KEY HERE,
-  authDomain: //AUTHDOMAIN,
-  projectId: //PROJECT ID
-};
-
+  apiKey: // API KEY HERE,
+  authDomain: // AUTHDOMAIN,
+  projectId: // PROJECT_ID,
+  storageBucket: // PROJECT_ID.appspot.com
 ```
 
-## Screenshots
-![Screenshot from 2023-05-12 10-04-59](https://github.com/zaneris123/motive-northcoders/assets/90579132/129296d9-6588-46a2-97e3-88148022e380)
-![Screenshot from 2023-05-12 10-05-12](https://github.com/zaneris123/motive-northcoders/assets/90579132/9475d2cb-7ad5-43fd-a3e0-0e3466baf210)
-![Screenshot from 2023-05-12 10-05-58](https://github.com/zaneris123/motive-northcoders/assets/90579132/1f79cb5a-9d52-4e51-bc62-a2d52802930b)
-![Screenshot from 2023-05-12 10-06-07](https://github.com/zaneris123/motive-northcoders/assets/90579132/41c0c815-665e-4f4c-ba86-8e25c823c2ab)
-![Screenshot from 2023-05-12 10-06-41](https://github.com/zaneris123/motive-northcoders/assets/90579132/2bb7d15a-a715-450b-8d5a-058e72ff97a9)
-![Screenshot from 2023-05-12 10-08-26](https://github.com/zaneris123/motive-northcoders/assets/90579132/d9684944-03c9-492a-96c1-ff7e2ae804e3)
-![Screenshot from 2023-05-12 10-10-27](https://github.com/zaneris123/motive-northcoders/assets/90579132/ec5d899a-be1d-4a09-afd4-bc975c153dae)
-![Screenshot from 2023-05-12 10-11-05](https://github.com/zaneris123/motive-northcoders/assets/90579132/339a6b7e-862a-4d7f-8f08-a09c77f2c301)
-![Screenshot from 2023-05-12 10-11-25](https://github.com/zaneris123/motive-northcoders/assets/90579132/96cb5bf9-88a3-4122-ae18-d40335604b78)
+Once done, you will have the following scripts to run and deploy the app.
+
+## Available Scripts
+
+1. Run
+
+```
+ionic serve
+```
+
+2. Build
+
+```
+ionic build
+```
+
+## Tech Stack
+
+- [Vue](https://vuejs.org/): JavaScript framework for building user interfaces.
+- [Ionic](https://ionicframework.com/): An open source mobile UI toolkit for building modern, high quality cross-platform mobile apps from a single code base.
+- [Capacitor](https://capacitorjs.com/): An open source native runtime for building Web Native apps. Create cross-platform iOS, Android, and Progressive Web Apps with JavaScript, HTML, and CSS.
+- [Firebase Cloud Firestore](https://firebase.google.com/docs/firestore): Flexible, scalable database for mobile, web, and server development.
+- [Firebase Authentication](https://firebase.google.com/docs/auth): To authenticate users to the app using identity providers in this case like Google, Twitter and Facebook.
+- [Firebase Cloud Storage](https://firebase.google.com/docs/storage): A powerful, simple, and cost-effective object storage service.
+- [Google Maps API](https://developers.google.com/maps): To display the interactive map view with the corresponding markers.
+
+## Team members
+
+- [Bobby Nagra](https://github.com/bobbynagra92)
+- [Roisin Long](https://github.com/Roisinlo)
+- [Akashdeep Singh Kaur](https://github.com/akashdeep931)
+- [Inna Chtej](https://github.com/xtej4ik)
+- [Zain Shah](https://github.com/zaneris123)

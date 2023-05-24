@@ -15,16 +15,14 @@
             <ion-list-header>Menu</ion-list-header>
             <ion-item
               lines="none"
-              :class="
-                currentPath.startsWith('/map') ? 'selected' : 'not_active'
-              "
+              :class="route.path.startsWith('/map') ? 'selected' : 'not_active'"
               @click="goTo('/map')"
               ><ion-label>Motive Map</ion-label></ion-item
             >
             <ion-item
               lines="none"
               :class="
-                currentPath.startsWith('/locations') ? 'selected' : 'not_active'
+                route.path.startsWith('/locations') ? 'selected' : 'not_active'
               "
               @click="goTo('/locations')"
               ><ion-label>Motive List</ion-label></ion-item
@@ -32,7 +30,7 @@
             <ion-item
               lines="none"
               :class="
-                currentPath.startsWith('/about') ? 'selected' : 'not_active'
+                route.path.startsWith('/about') ? 'selected' : 'not_active'
               "
               @click="goTo('/about')"
               ><ion-label>About</ion-label></ion-item
@@ -57,15 +55,22 @@
             <ion-item lines="none">
               <LoggedUser />
             </ion-item>
-            <ion-item class="button" lines="none">
-              <ion-icon :src="heart" />
-              <ion-label>My favourite Motives</ion-label></ion-item
+            <ion-item
+              class="button"
+              lines="none"
+              @click="goTo('/post')"
+              :class="
+                route.path.startsWith('/post') ? 'selected' : 'not_active'
+              "
             >
-            <ion-item class="button" lines="none">
-              <ion-icon :src="eye" />
-              <ion-label> My posted Motives</ion-label></ion-item
+              <ion-icon :src="addIcon" />
+              <ion-label>New Motive</ion-label></ion-item
             >
-            <ion-item id="logout" class="button" lines="none" @click="showAlert"
+            <ion-item
+              id="logout"
+              class="not_active"
+              lines="none"
+              @click="showAlert"
               ><ion-label>Log Out</ion-label></ion-item
             >
           </ion-list>
@@ -92,19 +97,16 @@ import {
   alertController,
 } from "@ionic/vue";
 import { useRoute, useRouter } from "vue-router";
-import { ref } from "vue";
 import GoogleLoginButton from "./components/GoogleLogInButton.vue";
 import TwitterLogInButton from "./components/TwitterLogInButton.vue";
 import FbLoginButton from "./components/FbLoginButton.vue";
 import LoggedUser from "./components/LoggedUser.vue";
 import { useUserStore } from "./stores/user";
-import heart from "./assets/heart-outline.svg";
-import eye from "./assets/eye-outline.svg";
+import addIcon from "./assets/add-outline.svg";
 
 const userStore = useUserStore();
 const route = useRoute();
 const router = useRouter();
-const currentPath = ref(route.path);
 
 const showAlert = async () => {
   const alert = await alertController.create({
@@ -129,7 +131,6 @@ const showAlert = async () => {
 
 const goTo = (goalPath) => {
   router.push(goalPath);
-  currentPath.value = goalPath;
 };
 </script>
 
@@ -138,18 +139,18 @@ ion-menu ion-content {
   --background: var(--ion-item-background, var(--ion-background-color, #fff));
 }
 
-ion-menu.md ion-list#navigation {
+ion-menu ion-list#navigation {
   border-bottom: 2px solid var(--ion-color-step-150, #d7d8da);
   margin: auto 20px;
 }
 
-.md #main-logo {
+#main-logo {
   display: flex;
   justify-content: center;
   cursor: pointer;
 }
 
-ion-menu.md ion-content ion-list#navigation ion-list-header {
+ion-menu ion-content ion-list#navigation ion-list-header {
   padding-left: 10px;
   font-size: 24px;
   font-weight: 600;
@@ -157,36 +158,36 @@ ion-menu.md ion-content ion-list#navigation ion-list-header {
   margin-bottom: 20px;
 }
 
-ion-menu.md ion-content ion-img {
+ion-menu ion-content ion-img {
   width: 300px;
   height: 300px;
 }
 
-ion-menu.md ion-content ion-list#navigation ion-item {
+ion-menu ion-content ion-list#navigation ion-item {
   font-size: 18px;
   cursor: pointer;
 }
 
-ion-menu.md ion-content ion-list#navigation ion-item.not_active :hover {
+ion-menu ion-content ion-list#navigation ion-item.not_active :hover {
   background-color: #49555e;
   padding: 10px;
   border-radius: 10px;
 }
 
-ion-menu.md ion-content ion-list#navigation ion-item.selected {
+ion-menu ion-content ion-list#navigation ion-item.selected {
   --background: rgba(var(--ion-color-primary-rgb), 0.14);
   border-radius: 8px;
 }
 
-ion-menu.md ion-content ion-list#navigation ion-item.selected :hover {
+ion-menu ion-content ion-list#navigation ion-item.selected :hover {
   padding: 5px;
 }
 
-ion-menu.md ion-list#login {
+ion-menu ion-list#login {
   margin: auto 20px;
 }
 
-ion-menu.md ion-content ion-list#login ion-list-header {
+ion-menu ion-content ion-list#login ion-list-header {
   padding-left: 10px;
   font-size: 24px;
   font-weight: 600;
@@ -194,11 +195,11 @@ ion-menu.md ion-content ion-list#login ion-list-header {
   margin: 20px auto;
 }
 
-ion-menu.md ion-list#account {
+ion-menu ion-list#account {
   margin: auto 20px;
 }
 
-ion-menu.md ion-content ion-list#account ion-list-header {
+ion-menu ion-content ion-list#account ion-list-header {
   padding-left: 10px;
   font-size: 24px;
   font-weight: 600;
@@ -206,20 +207,33 @@ ion-menu.md ion-content ion-list#account ion-list-header {
   margin: 20px auto;
 }
 
-ion-menu.md ion-content ion-list#account ion-item ion-label {
+ion-menu ion-content ion-list#account ion-item ion-label {
   margin-left: 10px;
 }
-ion-menu.md ion-content ion-list#account ion-item {
+ion-menu ion-content ion-list#account ion-item {
   font-size: 18px;
 }
 
-ion-menu.md ion-content ion-list#account ion-item.button {
-  cursor: pointer;
+ion-menu ion-content ion-list#account ion-item.selected {
+  --background: rgba(var(--ion-color-primary-rgb), 0.14);
+  border-radius: 10px;
 }
 
-ion-menu.md ion-content ion-list#account ion-item.button :hover {
+ion-menu ion-content ion-list#account ion-item.not_active :hover {
   background-color: #959c8d;
   padding: 10px;
   border-radius: 10px;
+}
+
+ion-menu ion-content ion-list#account ion-item.selected :hover {
+  padding: 10px;
+}
+
+ion-menu ion-content ion-list#account ion-item.button {
+  cursor: pointer;
+}
+
+#logout {
+  cursor: pointer;
 }
 </style>

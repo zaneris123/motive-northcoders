@@ -3,7 +3,7 @@
     <form class="comment-form">
       <ion-item>
         <ion-label position="stacked">Comment</ion-label>
-        <ion-textarea v-model="commentText"></ion-textarea>
+        <ion-textarea v-model="commentText" aria-label="Comment"></ion-textarea>
       </ion-item>
       <br />
       <ion-item>
@@ -11,24 +11,19 @@
         <br />
         <ion-radio-group v-model="commentRating">
           <ion-item>
-            <ion-label>1</ion-label>
-            <ion-radio value="1"></ion-radio>
+            <ion-radio value="1">1</ion-radio>
           </ion-item>
           <ion-item>
-            <ion-label>2</ion-label>
-            <ion-radio value="2"></ion-radio>
+            <ion-radio value="2">2</ion-radio>
           </ion-item>
           <ion-item>
-            <ion-label>3</ion-label>
-            <ion-radio value="3"></ion-radio>
+            <ion-radio value="3">3</ion-radio>
           </ion-item>
           <ion-item>
-            <ion-label>4</ion-label>
-            <ion-radio value="4"></ion-radio>
+            <ion-radio value="4">4</ion-radio>
           </ion-item>
           <ion-item>
-            <ion-label>5</ion-label>
-            <ion-radio value="5"></ion-radio>
+            <ion-radio value="5">5</ion-radio>
           </ion-item>
         </ion-radio-group>
       </ion-item>
@@ -111,6 +106,7 @@ ion-icon {
   border-radius: 50%;
   padding: 3px;
 }
+
 .comment-adding :hover {
   background-color: #333;
   border-radius: 50%;
@@ -119,14 +115,17 @@ ion-icon {
 .comment-form {
   background-color: #232323;
   color: #fff;
-  padding: 20px;
+  padding: 8px;
 }
 
 .comment-form ion-item {
   --background: #343434;
-  --color: #fff;
-  --placeholder-color: #b3b3b3;
+  --color: #a4a4a4;
   --border-color: #343434;
+}
+
+.comment-form ion-item ion-label {
+  margin-bottom: 10px;
 }
 
 .comment-form ion-textarea {
