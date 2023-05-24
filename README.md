@@ -59,6 +59,10 @@ A logged user, besides the previous features, is also ablte to:
 
 </div>
 
+## Demo video (Web)
+
+You can check the demo video of this app [here](https://www.linkedin.com/feed/update/urn:li:activity:7067189428439392256/).
+
 ## Installation and Set-up
 
 To run the project locally follow these steps:
