@@ -131,6 +131,7 @@ ionic build
 - [Firebase Authentication](https://firebase.google.com/docs/auth): To authenticate users to the app using identity providers in this case like Google, Twitter and Facebook.
 - [Firebase Cloud Storage](https://firebase.google.com/docs/storage): A powerful, simple, and cost-effective object storage service.
 - [Google Maps API](https://developers.google.com/maps): To display the interactive map view with the corresponding markers.
+- [Pinia state management]([https://developers.google.com/maps](https://pinia.vuejs.org/)): To handle user login data persistence.
 
 ## Team members
 
